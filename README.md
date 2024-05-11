@@ -1,24 +1,31 @@
-# README
+# CAFE WORKS.
+​
+## サイト概要
+### サイトテーマ
+作業がしやすいカフェを検索したり、おすすめのカフェを投稿したりできるコミュニティサイト
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### テーマを選んだ理由
+もともとカフェが好きで作業をすることが多いのですが、「電源はあるのか」「作業できる雰囲気か」など、作業しやすいカフェを探すのに時間がかかっていました。
+お仕事や勉強で利用したい方や、スマホの充電をしながらおいしいコーヒーが飲みたい旅行者など、さまざまな理由で作業カフェを利用したいユーザーが、
+簡単に行きたいカフェに巡り会えるサイトがあれば便利だと考え、このテーマを選びました。
+​
+### ターゲットユーザ
+・お仕事や勉強でカフェを利用したい方<br>
+・スマホなどを充電しながらカフェを楽しみたい方
 
-Things you may want to cover:
+### 主な利用シーン
+・近くに作業できるカフェがないか検索するとき<br>
+・おすすめの作業カフェを投稿するとき
+​
+## 設計書
+後ほど作成予定
+​
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
 
-* Ruby version
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+<!--実装機能リストURL: https://docs.google.com/spreadsheets/d/1csUTqHTr2t9Q0a-o5FOmjQaJ6OAbrXSBug06ZrfOiaU/edit#gid=885378170 >
