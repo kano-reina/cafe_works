@@ -11,6 +11,23 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <p class="logo">CAFE WORKS.</p>
+      <% if user_signed_in? %>
+        <ul>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        </ul>
+      <% else %>
+        <ul>
+          <%= link_to "Sign up", new_user_registration_path %>
+        </ul>
+        <ul>
+          <%= link_to "Log in", new_user_session_path %>
+        </ul>
+      <% end %>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>
