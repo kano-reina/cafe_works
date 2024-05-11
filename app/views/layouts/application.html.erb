@@ -15,7 +15,7 @@
       <p class="logo">CAFE WORKS.</p>
       <% if user_signed_in? %>
         <ul>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+          <%= link_to "Log out", destroy_user_session_path, method: :delete %>
         </ul>
       <% else %>
         <ul>
