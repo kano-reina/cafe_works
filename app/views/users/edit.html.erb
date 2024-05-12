@@ -1,2 +1,24 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h4>Edit Profile</h4>
+      <%= form_with model: @user do |f| %>
+        <div class="form-group">
+          <%= f.file_field :profile_image, accept: "image/*" %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :name, autofocus: true, placeholder:"User Name", class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.email_field :email, autocomplete: "email", placeholder:"Email" %>
+        </div>
+        <div class="form-group">
+          <%= f.submit 'Update account', class: "btn btn-secondary" %>
+        </div>
+        <div class="form-group">
+          <%= f.submit 'Delete account', class: "btn btn-secondary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
