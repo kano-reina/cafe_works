@@ -1,5 +1,5 @@
-<p>icon</p>
+<%= image_tag @user.get_profile_image(100,100) %>
 <h4><%= @user.name %></h4>
-<% unless @user.guest_user? %>
+<% if @user == current_user && !@user.guest_user? %>
   <%= link_to "Edit Profile", edit_user_path(@user) %>
 <% end %>
