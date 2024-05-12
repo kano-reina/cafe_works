@@ -1,5 +1,5 @@
 <p>icon</p>
 <h4><%= @user.name %></h4>
-<% if @user.email != "guest@example.com" %>
+<% unless @user.guest_user? %>
   <%= link_to "Edit Profile", edit_user_path(@user) %>
 <% end %>
