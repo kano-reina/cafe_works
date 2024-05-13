@@ -13,10 +13,10 @@
           <%= f.email_field :email, autocomplete: "email", placeholder:"Email" %>
         </div>
         <div class="form-group">
-          <%= f.submit 'Update account', class: "btn btn-secondary" %>
+           <%= f.submit 'Update account', name: 'update' %>
         </div>
         <div class="form-group">
-          <%= f.submit 'Delete account', class: "btn btn-secondary" %>
+           <%= f.submit 'Deactivate account', name: 'withdraw', data: { confirm: "Are you sure you want to deactivate your account?" } %>
         </div>
       <% end %>
     </div>

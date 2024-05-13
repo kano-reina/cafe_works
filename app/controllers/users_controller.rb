@@ -21,8 +21,8 @@ class UsersController < ApplicationController
   
   def withdraw
     @user = User.find(params[:id])
-    if @user.update(user_params.merge(status: "withdrawn"))
-      flash[:notice] = "You have successfully deleted your account."
+    if @user.withdraw
+      flash[:notice] = "You have successfully deactivated your account."
       redirect_to root_path
     else
       render :edit
