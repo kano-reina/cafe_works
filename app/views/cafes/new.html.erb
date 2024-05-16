@@ -1,17 +1,13 @@
 <h4>Add a new post</h4>
-<p>Picture</p>
-<p>Cafe Name</p>
-<p>Address</p>
-<p>Categories</p>
-<p>Comment</p>
-
-<%= form_with model: @cafe do |f| %>
+<%= form_with model: @cafe, url: cafes_path do |f| %>
   <p>Picture</p>
   <%= f.file_field :image, accept: "image/*" %>
 
   <p>Cafe Name</p>
+  <%= f.text_field :name %>
 
   <p>Address</p>
+  <%= f.text_field :address, placeholder:"東京都新宿区新宿３丁目１ー１ー１" %>
   
   <p>Categories</p>
   
