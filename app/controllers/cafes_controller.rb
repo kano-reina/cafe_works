@@ -4,6 +4,7 @@ class CafesController < ApplicationController
   end
   
   def create
+    @cafe.post
   end
 
   def index

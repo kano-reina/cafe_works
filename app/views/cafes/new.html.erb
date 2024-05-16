@@ -11,11 +11,19 @@
   
   <p>Categories</p>
   <p>Charge your phone/PC</p>
-  <%= f.select :name, options_for_select([["available"], ["N/A"]]), { multiple: true } %>
+  <%= f.radio_button :category, "available" %>
+  <%= f.label :category_available, "available" %>
+  <%= f.radio_button :category, "N/A" %>
+  <%= f.label :category_na, "N/A" %>
+  
   <p>Environment</p>
-  <%= f.select :name, options_for_select([["Meeting OK"], ["Chat OK"], ["Quiet Environment"]]), { multiple: true } %>
+  <%= f.collection_check_boxes :name, [["Meeting OK", "Meeting OK"], ["Chat OK", "Chat OK"], ["Quiet Environment", "Quiet Environment"]], :first, :last %>
+  
   <p>Wifi</p>
-  <%= f.select :name, options_for_select([["available"], ["N/A"]]), { multiple: true } %>
+  <%= f.radio_button :wifi, "available" %>
+  <%= f.label :wifi_available, "available" %>
+  <%= f.radio_button :wifi, "N/A" %>
+  <%= f.label :wifi_na, "N/A" %>
   
   <p>Comment</p>
   <%= f.text_area :body %>
