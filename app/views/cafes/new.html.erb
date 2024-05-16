@@ -10,6 +10,12 @@
   <%= f.text_field :address, placeholder:"東京都新宿区新宿３丁目１ー１ー１" %>
   
   <p>Categories</p>
+  <p>Charge your phone/PC</p>
+  <%= f.select :name, options_for_select([["available"], ["N/A"]]), { multiple: true } %>
+  <p>Environment</p>
+  <%= f.select :name, options_for_select([["Meeting OK"], ["Chat OK"], ["Quiet Environment"]]), { multiple: true } %>
+  <p>Wifi</p>
+  <%= f.select :name, options_for_select([["available"], ["N/A"]]), { multiple: true } %>
   
   <p>Comment</p>
   <%= f.text_area :body %>
