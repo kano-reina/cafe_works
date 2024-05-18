@@ -6,11 +6,6 @@ Rails.application.routes.draw do
     devise_scope :user do
         post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
     end
-    resources :users, only: [:show, :edit, :update] do
-        member do
-            patch :widthdraw
-        end
-    end
-    
-    resources :cafes
+    resources :users, only: [:show, :edit, :update, :destroy]
+    resources :posts
 end

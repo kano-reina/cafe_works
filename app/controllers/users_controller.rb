@@ -19,14 +19,10 @@ class UsersController < ApplicationController
     end
   end
   
-  def withdraw
-    @user = User.find(params[:id])
-    if @user.withdraw
-      flash[:notice] = "You have successfully deactivated your account."
-      redirect_to root_path
-    else
-      render :edit
-    end
+  def destroy
+    user = User.find(params[:id])
+    user.destroy
+    redirect_to root_path
   end
 
   private

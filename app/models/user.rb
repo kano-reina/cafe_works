@@ -29,10 +29,4 @@ class User < ApplicationRecord
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
   
-  enum status: { active: 0, inactive: 1 }
-
-  def withdraw
-    update(status: :inactive)
-  end
-  
 end

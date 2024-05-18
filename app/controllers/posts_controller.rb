@@ -1,4 +1,4 @@
-class CafesController < ApplicationController
+class PostsController < ApplicationController
   def new
     @cafe = Cafe.new
   end
@@ -28,6 +28,10 @@ class CafesController < ApplicationController
   
   def post_params
     params.require(:post).permit(:image, :name)
+  end
+  
+  def cafe_params
+    params.require(:post).permit(:name)
   end
   
   def feature_params
