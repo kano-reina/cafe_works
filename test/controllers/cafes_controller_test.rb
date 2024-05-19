@@ -15,9 +15,4 @@ class CafesControllerTest < ActionDispatch::IntegrationTest
     get cafes_show_url
     assert_response :success
   end
-
-  test "should get edit" do
-    get cafes_edit_url
-    assert_response :success
-  end
 end
