@@ -60,7 +60,6 @@ ActiveRecord::Schema.define(version: 2024_05_19_121206) do
   create_table "tags", force: :cascade do |t|
     t.boolean "has_power_outlet"
     t.boolean "is_conversation_allowed"
-    t.boolean "is_focus_friendly"
     t.boolean "has_wifi"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

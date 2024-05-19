@@ -3,28 +3,19 @@
   <%= f.text_field :name %>
 
   <p>Categories</p>
-  <p>Charge your phone/PC</p>
+  <p>Charge your phone/PC (Select one)</p>
   <%= f.fields_for :cafe_tags do |cafe_tag_form| %>
-    <%= cafe_tag_form.check_box :tag_id, { multiple: true }, Tag.find_by(name: 'available').id, nil %>
-    <%= cafe_tag_form.label :charge_available, "available" %>
-    <%= cafe_tag_form.check_box :tag_id, { multiple: true }, Tag.find_by(name: 'N/A').id, nil %>
-    <%= cafe_tag_form.label :charge_na, "N/A" %>
+    <%= cafe_tag_form.collection_select :tag_id, Tag.has_power_outlets.keys, :to_s, :titleize, { prompt: true } %>
   <% end %>
   
-  <p>Environment</p>
+  <p>Environment (Select one)</p>
   <%= f.fields_for :cafe_tags do |cafe_tag_form| %>
-    <%= cafe_tag_form.check_box :tag_id, { multiple: true }, Tag.find_by(name: 'Chat/Meeting OK').id, nil %>
-    <%= f.label :chat_meeting_ok, "Chat/Meeting OK" %>
-    <%= cafe_tag_form.check_box :tag_id, { multiple: true }, Tag.find_by(name: 'Quiet Environment').id, nil %>
-    <%= f.label :quiet_environment, "Quiet Environment" %>
+    <%= cafe_tag_form.collection_select :tag_id, Tag.is_conversation_alloweds.keys, :to_s, :titleize, { prompt: true } %>
   <% end %>
   
-  <p>Wifi</p>
+  <p>Wifi (Select one)</p>
   <%= f.fields_for :cafe_tags do |cafe_tag_form| %>
-    <%= cafe_tag_form.check_box :tag_id, { multiple: true }, Tag.find_by(name: 'available').id, nil %>
-    <%= f.label :wifi_available, "available" %>
-    <%= cafe_tag_form.check_box :tag_id, { multiple: true }, Tag.find_by(name: 'N/A').id, nil %>
-    <%= f.label :wifi_na, "N/A" %>
+    <%= cafe_tag_form.collection_select :tag_id, Tag.has_wifis.keys, :to_s, :titleize, { prompt: true } %>
   <% end %>
 
   <p>Address</p>

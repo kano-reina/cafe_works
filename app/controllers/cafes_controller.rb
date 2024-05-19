@@ -10,6 +10,10 @@ class CafesController < ApplicationController
     else
       render :new
     end
+    
+    tag = Tag.new(tag_params)
+    tag.cafe_id = cafe.id
+    
   end
 
   def index
@@ -21,6 +25,10 @@ class CafesController < ApplicationController
   private
   def cafe_params
     params.require(:cafe).permit(:name, :address, :city)
+  end
+  
+  def tag_params
+    params.require(:tag).permit(:has_power_outlet, :is_conversation_allowed, :has_wifi)
   end
   
 end
