@@ -1,2 +1,39 @@
-<h1>Cafes#new</h1>
-<p>Find me in app/views/cafes/new.html.erb</p>
+<%= form_with model: @cafe, url: cafes_path do |f| %>
+  <p>Cafe Name</p>
+  <%= f.text_field :name %>
+
+  <p>Categories</p>
+  <p>Charge your phone/PC</p>
+  <%= f.fields_for :cafe_tags do |cafe_tag_form| %>
+    <%= cafe_tag_form.check_box :tag_id, { multiple: true }, Tag.find_by(name: 'available').id, nil %>
+    <%= cafe_tag_form.label :charge_available, "available" %>
+    <%= cafe_tag_form.check_box :tag_id, { multiple: true }, Tag.find_by(name: 'N/A').id, nil %>
+    <%= cafe_tag_form.label :charge_na, "N/A" %>
+  <% end %>
+  
+  <p>Environment</p>
+  <%= f.fields_for :cafe_tags do |cafe_tag_form| %>
+    <%= cafe_tag_form.check_box :tag_id, { multiple: true }, Tag.find_by(name: 'Chat/Meeting OK').id, nil %>
+    <%= f.label :chat_meeting_ok, "Chat/Meeting OK" %>
+    <%= cafe_tag_form.check_box :tag_id, { multiple: true }, Tag.find_by(name: 'Quiet Environment').id, nil %>
+    <%= f.label :quiet_environment, "Quiet Environment" %>
+  <% end %>
+  
+  <p>Wifi</p>
+  <%= f.fields_for :cafe_tags do |cafe_tag_form| %>
+    <%= cafe_tag_form.check_box :tag_id, { multiple: true }, Tag.find_by(name: 'available').id, nil %>
+    <%= f.label :wifi_available, "available" %>
+    <%= cafe_tag_form.check_box :tag_id, { multiple: true }, Tag.find_by(name: 'N/A').id, nil %>
+    <%= f.label :wifi_na, "N/A" %>
+  <% end %>
+
+  <p>Address</p>
+  <%= f.text_field :address, placeholder:"東京都新宿区新宿３丁目１ー１ー１" %>
+  
+  <p>City</p>
+  <div class="field">
+    <%= f.select :city, ['Tokyo', 'Osaka', 'Shanghai', 'Bangkok', 'Melbourne', 'New York', 'Los Angeles', 'Paris', 'Rome','London'], prompt: 'Select a City' %>
+  </div>
+  
+  <%= f.submit 'Add cafe' %>
+<% end %>

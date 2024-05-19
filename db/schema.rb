@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_05_15_131604) do
+ActiveRecord::Schema.define(version: 2024_05_19_121206) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(version: 2024_05_15_131604) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "cafe_tags", force: :cascade do |t|
+    t.integer "cafe_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cafe_id"], name: "index_cafe_tags_on_cafe_id"
+    t.index ["tag_id"], name: "index_cafe_tags_on_tag_id"
+  end
+
   create_table "cafes", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -48,10 +57,11 @@ ActiveRecord::Schema.define(version: 2024_05_15_131604) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "cafe_id"
-    t.text "body"
+  create_table "tags", force: :cascade do |t|
+    t.boolean "has_power_outlet"
+    t.boolean "is_conversation_allowed"
+    t.boolean "is_focus_friendly"
+    t.boolean "has_wifi"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -71,4 +81,6 @@ ActiveRecord::Schema.define(version: 2024_05_15_131604) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cafe_tags", "caves"
+  add_foreign_key "cafe_tags", "tags"
 end
