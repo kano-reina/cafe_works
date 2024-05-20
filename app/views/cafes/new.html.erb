@@ -1,3 +1,11 @@
+<% if @cafe.errors.any? %>
+  <ul>
+    <%= @cafe.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= form_with model: @cafe, url: cafes_path do |f| %>
   <p>Cafe Name</p>
   <%= f.text_field :name %>
