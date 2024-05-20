@@ -3,20 +3,23 @@
   <%= f.text_field :name %>
 
   <p>Categories</p>
-  <p>Charge your phone/PC (Select one)</p>
-  <%= f.fields_for :cafe_tags do |cafe_tag_form| %>
-    <%= cafe_tag_form.collection_select :tag_id, Tag.has_power_outlets.keys, :to_s, :titleize, { prompt: true } %>
-  <% end %>
+  <p>Charge your phone/PC</p>
+  <%= f.radio_button :has_power_outlet, true, checked: false %>
+  <%= f.label :has_power_outlet_true, "available" %>
+  <%= f.radio_button :has_power_outlet, false, checked: false %>
+  <%= f.label :has_power_outlet_false, "N/A" %>
   
-  <p>Environment (Select one)</p>
-  <%= f.fields_for :cafe_tags do |cafe_tag_form| %>
-    <%= cafe_tag_form.collection_select :tag_id, Tag.is_conversation_alloweds.keys, :to_s, :titleize, { prompt: true } %>
-  <% end %>
+  <p>Environment</p>
+  <%= f.radio_button :chat_meeting_ok, true, checked: false %>
+  <%= f.label :chat_meeting_ok_true, "Chat/Meeting OK" %>
+  <%= f.radio_button :chat_meeting_ok, false, checked: false %>
+  <%= f.label :chat_meeting_ok_false, "Quiet Environment" %>
   
-  <p>Wifi (Select one)</p>
-  <%= f.fields_for :cafe_tags do |cafe_tag_form| %>
-    <%= cafe_tag_form.collection_select :tag_id, Tag.has_wifis.keys, :to_s, :titleize, { prompt: true } %>
-  <% end %>
+  <p>Wifi</p>
+  <%= f.radio_button :has_wifi, true, checked: false %>
+  <%= f.label :has_wifi_true, "available" %>
+  <%= f.radio_button :has_wifi, false, checked: false %>
+  <%= f.label :has_wifi_false, "N/A" %>
 
   <p>Address</p>
   <%= f.text_field :address, placeholder:"東京都新宿区新宿３丁目１ー１ー１" %>
@@ -25,6 +28,14 @@
   <div class="field">
     <%= f.select :city, ['Tokyo', 'Osaka', 'Shanghai', 'Bangkok', 'Melbourne', 'New York', 'Los Angeles', 'Paris', 'Rome','London'], prompt: 'Select a City' %>
   </div>
+  
+  <p>Tags</p>
+  <%= f.fields_for :cafe_tags do |cafe_tag_form| %>
+    <% Tag.all.each do |tag| %>
+      <%= cafe_tag_form.check_box :tag_id, { multiple: true }, tag.id, nil %>
+      <%= cafe_tag_form.label :tag_id, tag.name %><br>
+    <% end %>
+  <% end %>
   
   <%= f.submit 'Add cafe' %>
 <% end %>

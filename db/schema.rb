@@ -53,14 +53,15 @@ ActiveRecord::Schema.define(version: 2024_05_19_121206) do
     t.string "name"
     t.string "address"
     t.string "city"
+    t.boolean "has_power_outlet", default: false
+    t.boolean "chat_meeting_ok", default: false
+    t.boolean "has_wifi", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "tags", force: :cascade do |t|
-    t.boolean "has_power_outlet"
-    t.boolean "is_conversation_allowed"
-    t.boolean "has_wifi"
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
