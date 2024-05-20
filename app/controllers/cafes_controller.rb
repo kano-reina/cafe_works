@@ -24,11 +24,7 @@ class CafesController < ApplicationController
   
   private
   def cafe_params
-    params.require(:cafe).permit(:name, :address, :city)
-  end
-  
-  def tag_params
-    params.require(:tag).permit(:has_power_outlet, :is_conversation_allowed, :has_wifi)
+    params.require(:cafe).permit(:name, :address, :city, :has_power_outlet, :chat_meeting_ok, :has_wifi)
   end
   
 end
