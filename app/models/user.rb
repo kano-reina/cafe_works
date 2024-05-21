@@ -6,6 +6,8 @@ class User < ApplicationRecord
          
   has_many :posts, dependent: :destroy
   
+  validates :name, presence: true, length: { maximum: 30 }
+  
   GUEST_USER_EMAIL = "guest@example.com"
 
   def self.guest

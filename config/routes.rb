@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'posts/new'
+  get 'posts/edit'
     root to: "homes#top"
     get 'about' => 'homes#about', as: 'about'
     
@@ -8,4 +10,5 @@ Rails.application.routes.draw do
     end
     resources :users, only: [:show, :edit, :update, :destroy]
     resources :cafes, only: [:new, :index, :show, :create]
+    resources :posts, only: [:new, :create, :edit, :update, :destroy]
 end

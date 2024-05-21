@@ -2,6 +2,7 @@ class Cafe < ApplicationRecord
   self.table_name = 'cafes'
   has_many :cafe_tags, dependent: :destroy
   has_many :tags, through: :cafe_tags, dependent: :destroy
+  has_many :posts, dependent: :destroy
   
   validates :name, presence: true, uniqueness: true
   validates :address, presence: true, uniqueness: true
