@@ -37,13 +37,5 @@
     <%= f.select :city, ['Tokyo', 'Osaka', 'Shanghai', 'Bangkok', 'Melbourne', 'New York', 'Los Angeles', 'Paris', 'Rome','London'], prompt: 'Select a City' %>
   </div>
   
-  <p>Tags</p>
-  <%#= f.fields_for :cafe_tags do |cafe_tag_form| %>
-    <%# Tag.all.each do |tag| %>
-      <%#= cafe_tag_form.check_box :tag_id, { multiple: true }, tag.id, nil %>
-      <%#= cafe_tag_form.label :tag_id, tag.name %><br>
-    <%# end %>
-  <%# end %>
-  
   <%= f.submit 'Add cafe' %>
 <% end %>

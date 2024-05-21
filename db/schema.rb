@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_05_19_121206) do
+ActiveRecord::Schema.define(version: 2024_05_21_131600) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -60,6 +60,16 @@ ActiveRecord::Schema.define(version: 2024_05_19_121206) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "cafe_id", null: false
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cafe_id"], name: "index_posts_on_cafe_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -83,4 +93,6 @@ ActiveRecord::Schema.define(version: 2024_05_19_121206) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cafe_tags", "caves"
   add_foreign_key "cafe_tags", "tags"
+  add_foreign_key "posts", "caves"
+  add_foreign_key "posts", "users"
 end
