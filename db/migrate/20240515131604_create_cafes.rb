@@ -1,8 +1,8 @@
 class CreateCafes < ActiveRecord::Migration[6.1]
   def change
     create_table :cafes do |t|
-      t.string :name
-      t.string :address
+      t.string :name, unique: true
+      t.string :address, unique: true
       t.string :city
       t.boolean :has_power_outlet, default: false
       t.boolean :chat_meeting_ok, default: false

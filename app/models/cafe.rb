@@ -3,8 +3,8 @@ class Cafe < ApplicationRecord
   has_many :cafe_tags
   has_many :tags, through: :cafe_tags
   
-  validates :name, presence: true, uniqueness: { case_sensitive: false }
-  validates :address, presence: true, uniqueness: { case_sensitive: false }
+  validates :name, presence: true, uniqueness: true
+  validates :address, presence: true, uniqueness: true
   validates :city, presence: true
   validates :has_power_outlet, presence: true
   validates :chat_meeting_ok, presence: true

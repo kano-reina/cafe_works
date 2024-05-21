@@ -1,6 +1,6 @@
 <% if @cafe.errors.any? %>
   <ul>
-    <%= @cafe.errors.full_messages.each do |message| %>
+    <% @cafe.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
   </ul>
@@ -38,12 +38,12 @@
   </div>
   
   <p>Tags</p>
-  <%= f.fields_for :cafe_tags do |cafe_tag_form| %>
-    <% Tag.all.each do |tag| %>
-      <%= cafe_tag_form.check_box :tag_id, { multiple: true }, tag.id, nil %>
-      <%= cafe_tag_form.label :tag_id, tag.name %><br>
-    <% end %>
-  <% end %>
+  <%#= f.fields_for :cafe_tags do |cafe_tag_form| %>
+    <%# Tag.all.each do |tag| %>
+      <%#= cafe_tag_form.check_box :tag_id, { multiple: true }, tag.id, nil %>
+      <%#= cafe_tag_form.label :tag_id, tag.name %><br>
+    <%# end %>
+  <%# end %>
   
   <%= f.submit 'Add cafe' %>
 <% end %>

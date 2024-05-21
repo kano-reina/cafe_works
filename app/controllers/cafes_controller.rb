@@ -11,9 +11,6 @@ class CafesController < ApplicationController
       render :new
     end
     
-    tag = Tag.new(tag_params)
-    tag.cafe_id = cafe.id
-    
   end
 
   def index
