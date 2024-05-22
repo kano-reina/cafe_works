@@ -1,33 +1,18 @@
-<%= form_with model: @cafe, url: cafes_path do |f| %>
-  <p>Cafe Name</p>
-  <p>Can't find the cafe you're looking for? Create a new one here.</p>
-
-  <p>Categories</p>
-  <p>Charge your phone/PC</p>
-  <%= f.radio_button :has_power_outlet, true, checked: false %>
-  <%= f.label :has_power_outlet_true, "available" %>
-  <%= f.radio_button :has_power_outlet, false, checked: false %>
-  <%= f.label :has_power_outlet_false, "N/A" %>
-  
-  <p>Environment</p>
-  <%= f.radio_button :chat_meeting_ok, true, checked: false %>
-  <%= f.label :chat_meeting_ok_true, "Chat/Meeting OK" %>
-  <%= f.radio_button :chat_meeting_ok, false, checked: false %>
-  <%= f.label :chat_meeting_ok_false, "Quiet Environment" %>
-  
-  <p>Wifi</p>
-  <%= f.radio_button :has_wifi, true, checked: false %>
-  <%= f.label :has_wifi_true, "available" %>
-  <%= f.radio_button :has_wifi, false, checked: false %>
-  <%= f.label :has_wifi_false, "N/A" %>
-
-  <p>Address</p>
-  <%= f.text_field :address, placeholder:"東京都新宿区新宿３丁目１ー１ー１" %>
-  
-  <p>City</p>
-  <div class="field">
-    <%= f.select :city, ['Tokyo', 'Osaka', 'Shanghai', 'Bangkok', 'Melbourne', 'New York', 'Los Angeles', 'Paris', 'Rome','London'], prompt: 'Select a City' %>
+<%= form_with model: @user do |f| %>
+  <div class="form-group">
+    <p>Cafe Name</p>
+    <p>Can't find the cafe you're looking for? Create a new one 
+    <%= link_to"here.", new_cafe_path %></p>
   </div>
-  
-  <%= f.submit 'Add cafe' %>
+  <div class="form-group">
+    <p>Image</p>
+    <%= f.file_field :image, accept: "image/*" %>
+  </div>
+  <div class="form-group">
+    <p>Comment</p>
+    <%= f.text_area :body, placeholder:"Opening hours, how to access, share your thoughts", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit 'Share' %>
+  </div>
 <% end %>
