@@ -32,10 +32,5 @@
   <p>Address</p>
   <%= f.text_field :address, placeholder:"東京都新宿区新宿３丁目１ー１ー１" %>
   
-  <p>City</p>
-  <div class="field">
-    <%= f.select :city, ['Tokyo', 'Osaka', 'Shanghai', 'Bangkok', 'Melbourne', 'New York', 'Los Angeles', 'Paris', 'Rome','London'], prompt: 'Select a City' %>
-  </div>
-  
   <%= f.submit 'Add cafe' %>
 <% end %>

@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 2024_05_21_131600) do
   create_table "cafes", force: :cascade do |t|
     t.string "name"
     t.string "address"
-    t.string "city"
     t.boolean "has_power_outlet", default: false
     t.boolean "chat_meeting_ok", default: false
     t.boolean "has_wifi", default: false
