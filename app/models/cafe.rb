@@ -11,7 +11,7 @@ class Cafe < ApplicationRecord
   validates :chat_meeting_ok, presence: true
   validates :has_wifi, presence: true
   
-  def self.search_by_tags(tag_ids)
-    joins(:cafe_tags).where(cafe_tags: { tag_id: tag_ids }).distinct
-  end
+  scope :search_by_name_or_address, ->(query) {
+    where('name LIKE ? OR address LIKE ?', "%#{query}%", "%#{query}%")
+  }
 end
