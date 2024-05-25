@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     sessions: 'admin/sessions'
   }
   namespace :admin do
-    resources :users, only: [:index, :show]
+    resources :users, only: [:index, :show, :edit, :update]
     resources :cafes, only: :index
   end
   

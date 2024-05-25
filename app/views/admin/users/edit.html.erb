@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <%= form_with model: @user do |f| %>
+        <div class="form-group">
+          <%= f.label :id, "User ID" %>
+          <%= @user.id %>
+        </div>
+        <div class="form-group">
+          <%= f.label :name, "User Name" %>
+          <%= f.text_field :name, autofocus: true, placeholder:"User Name", class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.email_field :email, autocomplete: "email", placeholder:"Email" %>
+        </div>
+        <div class="form-group">
+           <%= f.submit 'Update', name: 'update' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
