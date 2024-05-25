@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin - CAFE WORKS</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <% if admin_signed_in? %>
+    <ul>
+      <%= link_to 'Cafes', admin_cafes_path %>
+    </ul>
+    <ul>
+      <%= link_to 'Users', admin_users_path %>
+    </ul>
+    <ul>
+      <%= link_to 'Log out', destroy_admin_session_path, method: :delete %>
+    </ul>
+  <% else %>
+    <ul>
+      <%= link_to "About", about_path %>
+    </ul>
+    <ul>
+      <%= link_to "Cafes", cafes_path %>
+    </ul>
+    <ul>
+      <%= link_to "Sign up", new_user_registration_path %>
+    </ul>
+    <ul>
+      <%= link_to "Log in", new_user_session_path %>
+    </ul>
+  <% end %>
+  <%= yield %>
+</body>
+</html>

@@ -25,7 +25,7 @@ class CafesController < ApplicationController
   
   private
   def cafe_params
-    params.require(:cafe).permit(:name, :address, :city, :has_power_outlet, :chat_meeting_ok, :has_wifi)
+    params.require(:cafe).permit(:name, :address, :has_power_outlet, :chat_meeting_ok, :has_wifi, :opening_hours, :introduction)
   end
   
 end

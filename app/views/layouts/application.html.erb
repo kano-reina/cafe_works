@@ -15,7 +15,7 @@
       <%= link_to "CAFE WORKS.", root_path %>
       <% if user_signed_in? %>
         <ul>
-          <%= link_to "Share your favorite cafe", new_cafe_path %>
+          <%= link_to "Add a new cafe", new_cafe_path %>
         </ul>
         <ul>
           <%= link_to "Cafes", cafes_path %>
@@ -29,6 +29,9 @@
       <% else %>
         <ul>
           <%= link_to "About", about_path %>
+        </ul>
+        <ul>
+          <%= link_to "Cafes", cafes_path %>
         </ul>
         <ul>
           <%= link_to "Sign up", new_user_registration_path %>

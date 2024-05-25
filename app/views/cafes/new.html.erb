@@ -32,5 +32,19 @@
   <p>Address</p>
   <%= f.text_field :address, placeholder:"東京都新宿区新宿３丁目１ー１ー１" %>
   
+  <p>Opening Hours</p>
+  <%= f.text_area :opening_hours, placeholder:
+    "Mon 9:00 AM - 12:00PM, 3:00PM - 8:00 PM
+Tue 9:00 AM - 12:00PM
+Wed 9:00 AM - 12:00PM
+Thu 9:00 AM - 12:00PM
+Fri 9:00 AM - 12:00PM
+Sat 9:00 AM - 12:00PM
+Sun 9:00 AM - 12:00PM"
+  %>
+  
+  <p>About Cafe</p>
+  <%= f.text_area :opening_hours %>
+  
   <%= f.submit 'Add cafe' %>
 <% end %>
