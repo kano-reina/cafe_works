@@ -6,6 +6,8 @@ class CreateCafes < ActiveRecord::Migration[6.1]
       t.boolean :has_power_outlet, default: false
       t.boolean :chat_meeting_ok, default: false
       t.boolean :has_wifi, default: false
+      t.text :opening_hours
+      t.text :introduction
       t.timestamps
     end
   end

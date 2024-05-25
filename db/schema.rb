@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(version: 2024_05_21_131600) do
     t.boolean "has_power_outlet", default: false
     t.boolean "chat_meeting_ok", default: false
     t.boolean "has_wifi", default: false
+    t.text "opening_hours"
+    t.text "introduction"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
