@@ -5,11 +5,10 @@ Rails.application.routes.draw do
   }
   namespace :admin do
     resources :users, only: [:index, :show, :edit, :update]
-    resources :cafes, only: :index
+    resources :cafes, only: [:index, :show, :edit, :update, :destroy]
   end
   
-  get 'posts/new'
-  get 'posts/edit'
+  scope module: :public do
     root to: "homes#top"
     get 'about' => 'homes#about', as: 'about'
     
@@ -17,7 +16,9 @@ Rails.application.routes.draw do
     devise_scope :user do
         post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
     end
+    
     resources :users, only: [:show, :edit, :update, :destroy]
     resources :cafes, only: [:new, :index, :show, :create]
     resources :posts, only: [:new, :create, :edit, :update, :destroy]
+  end
 end
