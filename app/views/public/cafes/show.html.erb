@@ -1,2 +1,29 @@
-<h1>Cafes#show</h1>
-<p>Find me in app/views/cafes/show.html.erb</p>
+<h1><%= @cafe.name %></h1>
+<div>
+  <% if @cafe.has_power_outlet? %>
+    <p>Available</p>
+  <% else %>
+    <p>N/A</p>
+  <% end %>
+</div>
+<div>
+  <% if @cafe.chat_meeting_ok? %>
+    <p>Chat/Meeting OK</p>
+  <% else %>
+    <p>Quiet Environment</p>
+  <% end %>
+</div>
+<div>
+  <% if @cafe.has_wifi? %>
+    <p>Available</p>
+  <% else %>
+    <p>N/A</p>
+  <% end %>
+</div>
+
+<h3>Detail Information</h3>
+<p>Address <%= @cafe.address %></p>
+<p>About Cafe <%= @cafe.introduction %></p>
+<p>Opening Hours <%= @cafe.opening_hours %></p>
+
+<h3>Reviews</h3>

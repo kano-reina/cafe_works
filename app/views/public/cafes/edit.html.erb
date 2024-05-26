@@ -6,7 +6,7 @@
   </ul>
 <% end %>
 
-<%= form_with model: @cafe, url: admin_cafe_path(@cafe) do |f| %>
+<%= form_with model: @cafe, url: cafe_path(@cafe) do |f| %>
   <p>Cafe Name</p>
   <%= f.text_field :name %>
 

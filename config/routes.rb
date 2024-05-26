@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users, only: [:index, :show, :edit, :update]
     resources :cafes, only: [:index, :show, :edit, :update, :destroy]
+    resources :reviews, only :[:destroy]
   end
   
   devise_for :users, controllers: {
@@ -22,7 +23,7 @@ Rails.application.routes.draw do
     get 'about' => 'homes#about', as: 'about'
     
     resources :users, only: [:show, :edit, :update, :destroy]
-    resources :cafes, only: [:new, :index, :show, :create]
-    resources :posts, only: [:new, :create, :edit, :update, :destroy]
+    resources :cafes, only: [:new, :index, :show, :edit, :create, :update]
+    resources :reviews, only: [:new, :create, :edit, :update, :destroy]
   end
 end
