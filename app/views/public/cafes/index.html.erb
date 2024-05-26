@@ -4,5 +4,5 @@
 <% end %>
 
 <% @cafes.each do |cafe| %>
-  <p><%= link_to cafe.name %></p>
+  <p><%= link_to cafe.name, cafe_path(cafe.id) %></p>
 <% end %>
