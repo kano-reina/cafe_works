@@ -3,7 +3,11 @@ class Admin::CafesController < ApplicationController
   before_action :authenticate_admin!
   
   def index
-    @cafes = Cafe.all
+    if params[:query].present?
+      @cafes = Cafe.search_by_name_or_address(params[:query])
+    else
+      @cafes = Cafe.all
+    end
   end
   
   def show

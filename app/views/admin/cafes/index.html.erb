@@ -1,1 +1,8 @@
-<h2>仮</h2>
+<%= form_with url: cafes_path, method: :get, local: true do |form| %>
+  <%= form.text_field :query, value: params[:query], plcaeholder:"cafe name, location" %>
+  <%= form.submit 'Search' %>
+<% end %>
+
+<% @cafes.each do |cafe| %>
+  <p><%= link_to cafe.name %></p>
+<% end %>
