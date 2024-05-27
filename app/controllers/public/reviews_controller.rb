@@ -1,12 +1,11 @@
 class Public::ReviewsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :set_cafe
   
   def new
     @review = Review.new
   end
   
   def create
-    @cafe = Cafe.find(params[:id])
     @review = @cafe.reviews.build(review_params)
     @review.user = current_user
     if @review.save
@@ -20,7 +19,11 @@ class Public::ReviewsController < ApplicationController
   end
 
   private
+  def set_cafe
+    @cafe = Cafe.find(params[:id])
+  end
+  
   def review_params
-    params.require(:review).permit(:body, :rating)
+    params.require(:review).permit(:rating, :body)
   end
 end
