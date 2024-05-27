@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_05_26_110748) do
+ActiveRecord::Schema.define(version: 2024_05_27_220340) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -73,6 +73,12 @@ ActiveRecord::Schema.define(version: 2024_05_26_110748) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.integer "review_id_id", null: false
+    t.text "comment"
+    t.index ["review_id_id"], name: "index_comments_on_review_id_id"
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "cafe_id", null: false
@@ -107,6 +113,7 @@ ActiveRecord::Schema.define(version: 2024_05_26_110748) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cafe_tags", "caves"
   add_foreign_key "cafe_tags", "tags"
+  add_foreign_key "comments", "review_ids"
   add_foreign_key "reviews", "caves"
   add_foreign_key "reviews", "users"
 end

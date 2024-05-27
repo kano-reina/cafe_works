@@ -1,9 +1,10 @@
 class Review < ApplicationRecord
   belongs_to :cafe
   belongs_to :user
+  has_many :comments, dependent: :destroy
   
   validates :rating, presence: true, inclusion: { in: 1..5 }
-  validates :comment, presence: true
+  validates :body, presence: true
   
   has_one_attached :image
   
