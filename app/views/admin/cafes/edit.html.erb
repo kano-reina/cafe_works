@@ -12,21 +12,21 @@
 
   <p>Categories</p>
   <p>Charge your phone/PC</p>
-  <%= f.radio_button :has_power_outlet, true, checked: false %>
+  <%= f.radio_button :has_power_outlet, true %>
   <%= f.label :has_power_outlet_true, "available" %>
-  <%= f.radio_button :has_power_outlet, false, checked: false %>
+  <%= f.radio_button :has_power_outlet, false %>
   <%= f.label :has_power_outlet_false, "N/A" %>
   
   <p>Environment</p>
-  <%= f.radio_button :chat_meeting_ok, true, checked: false %>
+  <%= f.radio_button :chat_meeting_ok, true %>
   <%= f.label :chat_meeting_ok_true, "Chat/Meeting OK" %>
-  <%= f.radio_button :chat_meeting_ok, false, checked: false %>
+  <%= f.radio_button :chat_meeting_ok, false %>
   <%= f.label :chat_meeting_ok_false, "Quiet Environment" %>
   
   <p>Wifi</p>
-  <%= f.radio_button :has_wifi, true, checked: false %>
+  <%= f.radio_button :has_wifi, true %>
   <%= f.label :has_wifi_true, "available" %>
-  <%= f.radio_button :has_wifi, false, checked: false %>
+  <%= f.radio_button :has_wifi, false %>
   <%= f.label :has_wifi_false, "N/A" %>
 
   <p>Address</p>

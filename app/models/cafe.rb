@@ -6,9 +6,9 @@ class Cafe < ApplicationRecord
   
   validates :name, presence: true, uniqueness: true
   validates :address, presence: true, uniqueness: true
-  validates :has_power_outlet, presence: true
-  validates :chat_meeting_ok, presence: true
-  validates :has_wifi, presence: true
+  validates :has_power_outlet, inclusion: {in: [true, false]}
+  validates :chat_meeting_ok, inclusion: {in: [true, false]}
+  validates :has_wifi, inclusion: {in: [true, false]}
   
   scope :search_by_name_or_address, ->(query) {
     where('name LIKE ? OR address LIKE ?', "%#{query}%", "%#{query}%")
