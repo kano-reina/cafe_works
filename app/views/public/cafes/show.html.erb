@@ -22,8 +22,10 @@
 </div>
 
 <h3>Detail Information</h3>
+<%= link_to "Edit info", edit_cafe_path(@cafe) %>
 <p>Address <%= @cafe.address %></p>
 <p>About Cafe <%= @cafe.introduction %></p>
 <p>Opening Hours <%= @cafe.opening_hours %></p>
 
 <h3>Reviews</h3>
+<%= link_to "Write a review", new_cafe_review_path(@cafe) %>

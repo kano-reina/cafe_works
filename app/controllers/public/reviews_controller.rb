@@ -9,7 +9,7 @@ class Public::ReviewsController < ApplicationController
     @review = @cafe.reviews.build(review_params)
     @review.user = current_user
     if @review.save
-      redirect_to cafe_path(@cafe.id), notice: 'Review was successfully created.'
+      redirect_to cafe_path(@cafe), notice: 'Review was successfully created.'
     else
       render :new
     end
