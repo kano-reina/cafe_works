@@ -9,7 +9,7 @@ class Public::ReviewsController < ApplicationController
     @review = @cafe.reviews.build(review_params)
     @review.user = current_user
     if @review.save
-      redirect_to @cafe, notice: 'Review was successfully created.'
+      redirect_to cafe_path(@cafe.id), notice: 'Review was successfully created.'
     else
       render :new
     end
@@ -20,7 +20,7 @@ class Public::ReviewsController < ApplicationController
 
   private
   def set_cafe
-    @cafe = Cafe.find(params[:id])
+    @cafe = Cafe.find(params[:cafe_id])
   end
   
   def review_params
