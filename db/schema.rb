@@ -111,9 +111,9 @@ ActiveRecord::Schema.define(version: 2024_05_27_220340) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "cafe_tags", "caves"
+  add_foreign_key "cafe_tags", "cafes"
   add_foreign_key "cafe_tags", "tags"
   add_foreign_key "comments", "review_ids"
-  add_foreign_key "reviews", "caves"
+  add_foreign_key "reviews", "cafes"
   add_foreign_key "reviews", "users"
 end

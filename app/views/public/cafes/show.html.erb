@@ -29,11 +29,7 @@
 
 <h3>Reviews</h3>
 <%= link_to "Write a review", new_cafe_review_path(@cafe) %>
-<p><%#= @cafe.user.name %></p>
-<div>
-  <% if @review %>
-    <%= render 'reviews/rating_form', review: @review %>
-  <% else %>
-    <%= render 'reviews/rating_form', review: Review.new %>
-  <% end %>
-</div>
+<% @reviews.each do |review| %>
+  <p><%= review.user.name %></p>
+  
+<% end %>

@@ -1,6 +1,6 @@
 <h2><%= @cafe.name %></h2>
 
-<%= form_with(model: @review, url: new_cafe_review_path(@cafe)) do |form| %>
+<%= form_with(model: @review, url: cafe_reviews_path(@cafe)) do |form| %>
   <div>
     <%= form.select :rating, options_for_select(1..5) %>
   </div>
