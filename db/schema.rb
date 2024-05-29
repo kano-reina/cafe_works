@@ -74,9 +74,9 @@ ActiveRecord::Schema.define(version: 2024_05_27_220340) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer "review_id_id", null: false
+    t.integer "review_id", null: false
     t.text "comment"
-    t.index ["review_id_id"], name: "index_comments_on_review_id_id"
+    t.index ["review_id"], name: "index_comments_on_review_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 2024_05_27_220340) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cafe_tags", "cafes"
   add_foreign_key "cafe_tags", "tags"
-  add_foreign_key "comments", "review_ids"
+  add_foreign_key "comments", "reviews"
   add_foreign_key "reviews", "cafes"
   add_foreign_key "reviews", "users"
 end

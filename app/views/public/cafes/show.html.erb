@@ -1,3 +1,10 @@
+<div>
+  <% if @review.image.attached? %>
+    <%= image_tag @review.image, size: "300x300" %>
+  <% else %>
+    <%= image_tag 'no_image', size: "100x100" %>
+  <% end %>
+</div>
 <h1><%= @cafe.name %></h1>
 <div>
   <% if @cafe.has_power_outlet? %>
@@ -22,14 +29,23 @@
 </div>
 
 <h3>Detail Information</h3>
-<%= link_to "Edit info", edit_cafe_path(@cafe) %>
 <p>Address <%= @cafe.address %></p>
 <p>About Cafe <%= @cafe.introduction %></p>
 <p>Opening Hours <%= @cafe.opening_hours %></p>
+<%= link_to "Edit info", edit_cafe_path(@cafe) %>
 
 <h3>Reviews</h3>
-<%= link_to "Write a review", new_cafe_review_path(@cafe) %>
 <% @reviews.each do |review| %>
   <p><%= image_tag review.user.get_profile_image(100,100) %><%= review.user.name %></p>
+  <p><%= review.rating %></p>
+  <p><%= review.body %></p>
+  <div>
+  <% if review.image.attached? %>
+    <%= image_tag review.image, size: "100x100" %>
+  <% else %>
+    N/A
+  <% end %>
+</div>
   
 <% end %>
+<%= link_to "Write a review", new_cafe_review_path(@cafe) %>

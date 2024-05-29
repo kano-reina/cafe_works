@@ -10,9 +10,11 @@ class Review < ApplicationRecord
   
   def get_image(width, height)
     unless image.attached?
-      file_path = Rails.root.join('app/assets/images/no_image2.jpg')
-      image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+      unless for_show
+        file_path = Rails.root.join('app/assets/images/no_image2.png')
+        image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+      end
     end
     image.variant(resize_to_limit: [width, height]).processed
-  end 
+  end
 end
