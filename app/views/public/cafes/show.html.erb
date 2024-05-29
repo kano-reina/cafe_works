@@ -30,6 +30,6 @@
 <h3>Reviews</h3>
 <%= link_to "Write a review", new_cafe_review_path(@cafe) %>
 <% @reviews.each do |review| %>
-  <p><%= review.user.name %></p>
+  <p><%= image_tag review.user.get_profile_image(100,100) %><%= review.user.name %></p>
   
 <% end %>
