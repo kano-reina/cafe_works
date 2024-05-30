@@ -1,8 +1,9 @@
 <div>
-  <% if @review.image.attached? %>
-    <%= image_tag @review.image, size: "300x300" %>
+  <% last_review = @cafe.reviews.order(created_at: :desc).first %>
+  <% if last_review.present? && last_review.image.attached? %>
+    <%= image_tag last_review.image.variant(resize_to_limit: [500, 500]).processed %>
   <% else %>
-    <%= image_tag 'no_image', size: "100x100" %>
+    <%= image_tag 'no_image.jpg', size: "500x500" %>
   <% end %>
 </div>
 <h1><%= @cafe.name %></h1>
@@ -49,3 +50,4 @@
   
 <% end %>
 <%= link_to "Write a review", new_cafe_review_path(@cafe) %>
+<%= link_to "Edit", edit_cafe_review_path(@cafe) %>

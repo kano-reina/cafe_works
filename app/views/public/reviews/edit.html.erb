@@ -1,2 +1,21 @@
-<h1>Public::Reviews#edit</h1>
-<p>Find me in app/views/public/reviews/edit.html.erb</p>
+<h2><%= @cafe.name %></h2>
+
+<%= form_with(model: @review, url: cafe_review_path(@cafe)) do |form| %>
+  <div>
+    <%= form.select :rating, options_for_select(1..5, @review.rating) %>
+  </div>
+  <div>
+    <%= form.label :image, "Image" %>
+    <%= form.file_field :image, accept: "image/*" %>
+  </div>
+  <div>
+    <%= form.label :body, "Comment" %>
+    <%= form.text_area :body %>
+  </div>
+  <div>
+    <%= form.submit 'Update review' %>
+  </div>
+<% end %>
+<div>
+  <%= button_to 'Delete review', cafe_review_path(@cafe), method: :delete, data: { confirm: "Are you sure you want to delete your review?" } %>
+</div>

@@ -10,10 +10,10 @@ class Public::UsersController < ApplicationController
   end
   
   def update
-    @user = User.find(params[:id])
-    if @user.update(user_params)
+    user = User.find(params[:id])
+    if user.update(user_params)
       flash[:notice] = "You have successfully updated your account."
-      redirect_to user_path(@user.id)
+      redirect_to user_path(user.id)
     else
       render :edit
     end

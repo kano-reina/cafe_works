@@ -1,5 +1,4 @@
 class Cafe < ApplicationRecord
-  self.table_name = 'cafes'
   has_many :cafe_tags, dependent: :destroy
   has_many :tags, through: :cafe_tags, dependent: :destroy
   has_many :reviews, dependent: :destroy
