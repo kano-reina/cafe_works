@@ -16,8 +16,19 @@ class Public::ReviewsController < ApplicationController
   end
   
   def edit
+    @review = Review.find(params[:id])
   end
-
+  
+  def update
+    @review = Review.find(params[:id])
+    if @review.update(review_params)
+      flash[:notice] = "You have updated review successfully."
+      redirect_to cafe_path(@cafe)
+    else
+      render :edit
+    end
+  end
+  
   private
   def set_cafe
     @cafe = Cafe.find(params[:cafe_id])
