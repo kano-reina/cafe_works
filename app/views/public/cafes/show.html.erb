@@ -47,7 +47,8 @@
     N/A
   <% end %>
 </div>
-  
+  <% if review.user == current_user %>
+    <%= link_to "Edit", edit_cafe_review_path(@cafe) %>
+  <% end %>
 <% end %>
 <%= link_to "Write a review", new_cafe_review_path(@cafe) %>
-<%= link_to "Edit", edit_cafe_review_path(@cafe) %>
