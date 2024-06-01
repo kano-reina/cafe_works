@@ -1,20 +1,9 @@
 <h2><%= @cafe.name %></h2>
 
 <%= form_with(model: @review, url: cafe_reviews_path(@cafe)) do |form| %>
-  <div>
-    <%= form.hidden_field :rating, id: :review_rating %>
+  <div id="review_rating">
+    <%= form.hidden_field :rating %>
   </div>
-  <script>
-　　　　$('#star').empty();
-  $('#star').raty({
-    size     : 36,
-    starOff:  '<%= asset_path('star-off.png') %>',
-    starOn : '<%= asset_path('star-on.png') %>',
- 　 　　　scoreName: ‘review[rating]’,　
-    half: false,
-  });
-  </script>
-  
   <div>
     <%= form.label :image, "Image" %>
     <%= form.file_field :image, accept: "image/*" %>
@@ -27,3 +16,14 @@
     <%= form.submit 'Post Review' %>
   </div>
 <% end %>
+<script>
+  var elem = document.getElementById('review_rating');
+  var opt = {  
+      starOn: "<%= asset_path('star-on.png') %>",
+      starOff: "<%= asset_path('star-off.png') %>",
+      half: false,
+      scoreName: 'review[rating]'
+    };
+  if (elem) elem.innerHTML = ""
+  raty(elem, opt);
+</script>

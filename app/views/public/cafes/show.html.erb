@@ -42,17 +42,30 @@
 <h3>Reviews</h3>
 <% @cafe.reviews.each do |review| %>
   <p><%= image_tag review.user.get_profile_image(100,100) %><%= review.user.name %></p>
-  <p><%= review.rating %></p>
+  <div id="review_rating_<%= review.id %>">
+    <script>
+      var elem = document.getElementById('review_rating_<%= review.id %>');
+      var opt = {  
+          starOn: "<%= asset_path('star-on.png') %>",
+          starOff: "<%= asset_path('star-off.png') %>",
+          half: false,
+          readOnly: true,
+          score: <%= review.rating %>,
+        };
+      if (elem) elem.innerHTML = ""
+      raty(elem, opt);
+    </script>
+  </div>
   <p><%= review.body %></p>
   <div>
-  <% if review.image.attached? %>
-    <%= image_tag review.image, size: "100x100" %>
-  <% else %>
-    N/A
-  <% end %>
-</div>
+    <% if review.image.attached? %>
+      <%= image_tag review.image, size: "100x100" %>
+    <% else %>
+      N/A
+    <% end %>
+  </div>
   <% if review.user == current_user %>
-    <%= link_to "Edit", edit_cafe_review_path(@cafe, @review) %>
+    <%= link_to "Edit", edit_cafe_review_path(@cafe, review) %>
   <% end %>
 <% end %>
 <%= link_to "Write a review", new_cafe_review_path(@cafe) %>

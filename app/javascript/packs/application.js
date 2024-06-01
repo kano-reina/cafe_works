@@ -8,6 +8,17 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+window.$ = window.jQuery = require('jquery');
+
+import Raty from "../src/raty"
+window.raty = (elem, opt) => {
+    if (elem && opt) {
+      var raty = new Raty(elem, opt)
+      raty.init();
+      return raty;
+    }
+}
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
