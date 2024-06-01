@@ -1,4 +1,8 @@
 <div>
+  <%= flash[:notice] %>
+</div>
+
+<div>
   <% last_review = @cafe.reviews.order(created_at: :desc).first %>
   <% if last_review.present? && last_review.image.attached? %>
     <%= image_tag last_review.image.variant(resize_to_limit: [500, 500]).processed %>
@@ -36,7 +40,7 @@
 <%= link_to "Edit info", edit_cafe_path(@cafe) %>
 
 <h3>Reviews</h3>
-<% @reviews.each do |review| %>
+<% @cafe.reviews.each do |review| %>
   <p><%= image_tag review.user.get_profile_image(100,100) %><%= review.user.name %></p>
   <p><%= review.rating %></p>
   <p><%= review.body %></p>
@@ -48,7 +52,7 @@
   <% end %>
 </div>
   <% if review.user == current_user %>
-    <%= link_to "Edit", edit_cafe_review_path(@cafe) %>
+    <%= link_to "Edit", edit_cafe_review_path(@cafe, @review) %>
   <% end %>
 <% end %>
 <%= link_to "Write a review", new_cafe_review_path(@cafe) %>

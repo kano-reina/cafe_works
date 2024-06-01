@@ -1,3 +1,7 @@
+<div>
+  <%= flash[:notice] %>
+</div>
+
 <% if @cafe.errors.any? %>
   <ul>
     <% @cafe.errors.full_messages.each do |message| %>

@@ -2,8 +2,19 @@
 
 <%= form_with(model: @review, url: cafe_reviews_path(@cafe)) do |form| %>
   <div>
-    <%= form.select :rating, options_for_select(1..5) %>
+    <%= form.hidden_field :rating, id: :review_rating %>
   </div>
+  <script>
+　　　　$('#star').empty();
+  $('#star').raty({
+    size     : 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+ 　 　　　scoreName: ‘review[rating]’,　
+    half: false,
+  });
+  </script>
+  
   <div>
     <%= form.label :image, "Image" %>
     <%= form.file_field :image, accept: "image/*" %>
