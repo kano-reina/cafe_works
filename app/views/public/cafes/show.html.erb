@@ -33,6 +33,21 @@
   <% end %>
 </div>
 
+<div id="average_rating">
+  <script>
+    var elem = document.getElementById('average_rating');
+    var opt = {  
+      starOn: "<%= asset_path('star-on.png') %>",
+      starOff: "<%= asset_path('star-off.png') %>",
+      half: false,
+      readOnly: true,
+      score: <%= @average_rating %>,
+    };
+    if (elem) elem.innerHTML = ""
+    raty(elem, opt);
+  </script>
+</div>
+
 <h3>Detail Information</h3>
 <p>Address <%= @cafe.address %></p>
 <p>About Cafe <%= @cafe.introduction %></p>
@@ -58,11 +73,7 @@
   </div>
   <p><%= review.body %></p>
   <div>
-    <% if review.image.attached? %>
-      <%= image_tag review.image, size: "100x100" %>
-    <% else %>
-      N/A
-    <% end %>
+    <%= image_tag review.image, size: "100x100" %>
   </div>
   <% if review.user == current_user %>
     <%= link_to "Edit", edit_cafe_review_path(@cafe, review) %>

@@ -7,3 +7,26 @@
 <% if @user == current_user && !@user.guest_user? %>
   <%= link_to "Edit Profile", edit_user_path(@user) %>
 <% end %>
+
+<h4>Reviews</h4>
+<% @user.reviews.each do |review| %>
+  <h3><%= review.cafe.name %></h3>
+  <div id="review_rating_<%= review.id %>">
+    <script>
+      var elem = document.getElementById('review_rating_<%= review.id %>');
+      var opt = {  
+          starOn: "<%= asset_path('star-on.png') %>",
+          starOff: "<%= asset_path('star-off.png') %>",
+          half: false,
+          readOnly: true,
+          score: <%= review.rating %>,
+        };
+      if (elem) elem.innerHTML = ""
+      raty(elem, opt);
+    </script>
+  </div>
+  <p><%= review.body %></p>
+  <div>
+    <%= image_tag review.image, size: "100x100" %>
+  </div>
+<% end %>

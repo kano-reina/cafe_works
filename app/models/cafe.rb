@@ -9,6 +9,11 @@ class Cafe < ApplicationRecord
   validates :chat_meeting_ok, inclusion: {in: [true, false]}
   validates :has_wifi, inclusion: {in: [true, false]}
   
+  def average_rating
+    return 0 if reviews.empty?
+    reviews.average(:rating).to_f.round(2)
+  end
+  
   scope :search_by_name_or_address, ->(query) {
     where('name LIKE ? OR address LIKE ?', "%#{query}%", "%#{query}%")
   }
