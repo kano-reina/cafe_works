@@ -2,6 +2,7 @@ class Cafe < ApplicationRecord
   has_many :cafe_tags, dependent: :destroy
   has_many :tags, through: :cafe_tags, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
   
   validates :name, presence: true, uniqueness: true
   validates :address, presence: true, uniqueness: true

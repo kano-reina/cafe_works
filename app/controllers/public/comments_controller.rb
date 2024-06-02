@@ -4,11 +4,9 @@ class Public::CommentsController < ApplicationController
 
   def create
     @comment = @review.comments.new(comment_params)
-    if @comment.save
-      redirect_to cafe_path(@cafe), notice: 'Comment was successfully created.'
-    else
-      redirect_to cafe_path(@cafe), notice: 'Comment was not created.'
-    end
+    @comment.user = current_user
+    @comment.save
+    redirect_to cafe_path(@cafe), notice: 'Your comment has been successfully created.'
   end
   
   def destroy

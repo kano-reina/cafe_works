@@ -3,6 +3,7 @@ class Public::UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @cafes = Cafe.all
   end
 
   def edit
