@@ -24,6 +24,7 @@ class Public::CafesController < ApplicationController
   def show
     @cafe = Cafe.find(params[:id])
     @average_rating = @cafe.average_rating
+    @comment = Comment.new
   end
   
   def edit 

@@ -55,6 +55,7 @@
 <%= link_to "Edit info", edit_cafe_path(@cafe) %>
 
 <h3>Reviews</h3>
+<%= link_to "Write a review", new_cafe_review_path(@cafe) %>
 <% @cafe.reviews.each do |review| %>
   <p>
     <%= link_to user_path(review.user_id) do %>
@@ -83,5 +84,25 @@
   <% if review.user == current_user %>
     <%= link_to "Edit", edit_cafe_review_path(@cafe, review) %>
   <% end %>
+  
+  <div>
+    <% review.comments.each do |comment| %>
+      <%= link_to user_path(comment.user_id) do %>
+        <%= image_tag comment.user.get_profile_image(100,100) %>
+      <% end %>
+      <%= comment.comment %>
+      <% if comment.user == current_user %>
+        <%= button_to 'Delete', cafe_path(@cafe), method: :delete, data: { confirm: "Are you sure you want to delete your comment?" } %>
+      <% end %>
+    <% end %>
+  </div>
+  <div>
+    <%= form_with model: @comment, url: cafe_review_comments_path(review.cafe_id, review) do |f| %>
+      <% if current_user.email != "guest@example.com" %>
+        <%= image_tag current_user.get_profile_image(100,100) %>
+        <%= f.text_field :comment, placeholder:"Write a Comment" %>
+        <%= f.submit 'Post' %>
+      <% end %>
+    <% end %>  
+  </div>
 <% end %>
-<%= link_to "Write a review", new_cafe_review_path(@cafe) %>
