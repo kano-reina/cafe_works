@@ -2,6 +2,14 @@
   <%= flash[:notice] %>
 </div>
 
+<div>
+  <% last_review = @cafe.reviews.order(created_at: :desc).first %>
+  <% if last_review.present? && last_review.image.attached? %>
+    <%= image_tag last_review.image.variant(resize_to_limit: [500, 500]).processed %>
+  <% else %>
+    <%= image_tag 'no_image.jpg', size: "500x500" %>
+  <% end %>
+</div>
 <h1><%= @cafe.name %></h1>
 <div>
   <% if @cafe.has_power_outlet? %>
@@ -25,9 +33,78 @@
   <% end %>
 </div>
 
+<div id="average_rating">
+  <script>
+    var elem = document.getElementById('average_rating');
+    var opt = {  
+      starOn: "<%= asset_path('star-on.png') %>",
+      starOff: "<%= asset_path('star-off.png') %>",
+      half: false,
+      readOnly: true,
+      score: <%= @average_rating %>,
+    };
+    if (elem) elem.innerHTML = ""
+    raty(elem, opt);
+  </script>
+</div>
+
 <h3>Detail Information</h3>
 <p>Address <%= @cafe.address %></p>
 <p>About Cafe <%= @cafe.introduction %></p>
 <p>Opening Hours <%= @cafe.opening_hours %></p>
+<%= link_to "Edit info", edit_cafe_path(@cafe) %>
 
 <h3>Reviews</h3>
+<%= link_to "Write a review", new_cafe_review_path(@cafe) %>
+<% @cafe.reviews.each do |review| %>
+  <p>
+    <%= link_to user_path(review.user_id) do %>
+      <%= image_tag review.user.get_profile_image(100,100) %>
+      <%= review.user.name %>
+    <% end %>
+  </p>
+  <div id="review_rating_<%= review.id %>">
+    <script>
+      var elem = document.getElementById('review_rating_<%= review.id %>');
+      var opt = {  
+          starOn: "<%= asset_path('star-on.png') %>",
+          starOff: "<%= asset_path('star-off.png') %>",
+          half: false,
+          readOnly: true,
+          score: <%= review.rating %>,
+        };
+      if (elem) elem.innerHTML = ""
+      raty(elem, opt);
+    </script>
+  </div>
+  <p><%= review.body %></p>
+  <div>
+    <%= image_tag review.image, size: "100x100" %>
+  </div>
+  <% if review.user == current_user %>
+    <%= link_to "Edit", edit_cafe_review_path(@cafe, review) %>
+  <% end %>
+  
+  <div>
+    <% review.comments.each do |comment| %>
+      <p>
+        <%= link_to user_path(comment.user_id) do %>
+          <%= image_tag comment.user.get_profile_image(100,100) %>
+        <% end %>
+        <%= comment.comment %>
+        <% if comment.user == current_user %>
+          <%= button_to 'Delete', cafe_review_comment_path(@cafe, review, comment), method: :delete, data: { confirm: "Are you sure you want to delete your comment?" } %>
+        <% end %>
+      </p>
+    <% end %>
+  </div>
+  <div>
+    <%= form_with model: @comment, url: cafe_review_comments_path(review.cafe_id, review) do |f| %>
+      <% if current_user.email != "guest@example.com" %>
+        <%= image_tag current_user.get_profile_image(100,100) %>
+        <%= f.text_field :comment, placeholder:"Write a Comment" %>
+        <%= f.submit 'Post' %>
+      <% end %>
+    <% end %>  
+  </div>
+<% end %>
