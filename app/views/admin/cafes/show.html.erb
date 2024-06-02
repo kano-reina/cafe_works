@@ -52,7 +52,7 @@
 <p>Address <%= @cafe.address %></p>
 <p>About Cafe <%= @cafe.introduction %></p>
 <p>Opening Hours <%= @cafe.opening_hours %></p>
-<%= link_to "Edit info", edit_cafe_path(@cafe) %>
+<%= link_to "Edit info", edit_admin_cafe_path(@cafe) %>
 
 <h3>Reviews</h3>
 <%= link_to "Write a review", new_cafe_review_path(@cafe) %>
@@ -97,14 +97,5 @@
         <% end %>
       </p>
     <% end %>
-  </div>
-  <div>
-    <%= form_with model: @comment, url: cafe_review_comments_path(review.cafe_id, review) do |f| %>
-      <% if current_user.email != "guest@example.com" %>
-        <%= image_tag current_user.get_profile_image(100,100) %>
-        <%= f.text_field :comment, placeholder:"Write a Comment" %>
-        <%= f.submit 'Post' %>
-      <% end %>
-    <% end %>  
   </div>
 <% end %>

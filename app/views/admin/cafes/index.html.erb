@@ -4,7 +4,7 @@
 <% end %>
 
 <% @cafes.each do |cafe| %>
-  <p><%= link_to cafe.name, cafe_path(cafe.id) %></p>
+  <p><%= link_to cafe.name, admin_cafe_path(cafe.id) %></p>
   <div>
     <% last_review = cafe.reviews.order(created_at: :desc).first %>
     <% if last_review.present? && last_review.image.attached? %>
