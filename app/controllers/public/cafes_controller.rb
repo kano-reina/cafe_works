@@ -6,7 +6,7 @@ class Public::CafesController < ApplicationController
   def create
     @cafe = Cafe.new(cafe_params)
     if @cafe.save
-      redirect_to root_path
+      redirect_to cafes_path
       flash[:notice] = "You have added cafe successfully."
     else
       render :new

@@ -56,7 +56,12 @@
 
 <h3>Reviews</h3>
 <% @cafe.reviews.each do |review| %>
-  <p><%= image_tag review.user.get_profile_image(100,100) %><%= review.user.name %></p>
+  <p>
+    <%= link_to user_path(review.user_id) do %>
+      <%= image_tag review.user.get_profile_image(100,100) %>
+      <%= review.user.name %>
+    <% end %>
+  </p>
   <div id="review_rating_<%= review.id %>">
     <script>
       var elem = document.getElementById('review_rating_<%= review.id %>');

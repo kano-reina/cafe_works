@@ -10,7 +10,7 @@
 
 <h4>Reviews</h4>
 <% @user.reviews.each do |review| %>
-  <h3><%= review.cafe.name %></h3>
+  <h3><%= link_to review.cafe.name, cafe_path(review.cafe_id) %></h3>
   <div id="review_rating_<%= review.id %>">
     <script>
       var elem = document.getElementById('review_rating_<%= review.id %>');
