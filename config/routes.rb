@@ -5,8 +5,11 @@ Rails.application.routes.draw do
   }
   namespace :admin do
     resources :users, only: [:index, :show, :edit, :update]
-    resources :cafes, only: [:index, :show, :edit, :update, :destroy]
-    resources :reviews, only: [:destroy]
+    resources :cafes, only: [:index, :show, :edit, :update, :destroy] do
+     resources :reviews, only: [:destroy] do
+      resources :comments, only: [:destroy]
+     end
+    end
   end
   
   devise_for :users, controllers: {

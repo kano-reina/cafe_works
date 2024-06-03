@@ -4,8 +4,41 @@
 
 <%= image_tag @user.get_profile_image(100,100) %>
 <h4><%= @user.name %></h4>
-<%= link_to "Edit Profile", edit_user_path(@user) %>
+<%= link_to "Edit Profile", edit_admin_user_path(@user) %>
 
 <h4>Reviews</h4>
+<% @user.reviews.each do |review| %>
+  <h3><%= link_to review.cafe.name, admin_cafe_path(review.cafe_id) %></h3>
+  <div id="review_rating_<%= review.id %>">
+    <script>
+      var elem = document.getElementById('review_rating_<%= review.id %>');
+      var opt = {  
+          starOn: "<%= asset_path('star-on.png') %>",
+          starOff: "<%= asset_path('star-off.png') %>",
+          half: false,
+          readOnly: true,
+          score: <%= review.rating %>,
+        };
+      if (elem) elem.innerHTML = ""
+      raty(elem, opt);
+    </script>
+  </div>
+  <p><%= review.body %></p>
+  <div>
+    <%= image_tag review.image, size: "100x100" %>
+  </div>
+<% end %>
 
 <h4>Bookmarks</h4>
+<% @user.bookmarks.each do |bookmark| %>
+  <% cafe = bookmark.cafe %>
+  <p><%= link_to cafe.name, admin_cafe_path(cafe.id) %></p>
+  <div>
+    <% last_review = cafe.reviews.order(created_at: :desc).first %>
+    <% if last_review.present? && last_review.image.attached? %>
+      <%= image_tag last_review.image.variant(resize_to_limit: [500, 500]).processed %>
+    <% else %>
+      <%= image_tag 'no_image.jpg', size: "500x500" %>
+    <% end %>
+  </div>
+<% end %>

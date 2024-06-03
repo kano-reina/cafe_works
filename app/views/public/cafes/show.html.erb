@@ -64,6 +64,7 @@
 <%= link_to "Edit info", edit_cafe_path(@cafe) %>
 
 <h3>Reviews</h3>
+<%= link_to "Write a review", new_cafe_review_path(@cafe) %>
 <% @cafe.reviews.each do |review| %>
   <p>
     <%= link_to user_path(review.user_id) do %>
