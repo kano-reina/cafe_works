@@ -1,4 +1,6 @@
 class Public::CafesController < ApplicationController
+  before_action :authenticate_user!, only: [:new]
+  
   def new
     @cafe = Cafe.new
   end
