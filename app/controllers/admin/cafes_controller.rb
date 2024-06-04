@@ -1,6 +1,5 @@
 class Admin::CafesController < ApplicationController
   layout 'admin' 
-  before_action :authenticate_admin!
   
   def index
     if params[:query].present?

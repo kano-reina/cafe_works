@@ -1,4 +1,5 @@
 class Public::CommentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_cafe
   before_action :set_review
 
