@@ -18,4 +18,9 @@ class Cafe < ApplicationRecord
   scope :search_by_name_or_address, ->(query) {
     where('name LIKE ? OR address LIKE ?', "%#{query}%", "%#{query}%")
   }
+  
+  def self.page(page_number)
+    Cafe.all.page(page_number)
+  end
+  
 end

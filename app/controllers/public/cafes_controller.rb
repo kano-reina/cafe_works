@@ -19,7 +19,7 @@ class Public::CafesController < ApplicationController
     if params[:query].present?
       @cafes = Cafe.search_by_name_or_address(params[:query])
     else
-      @cafes = Cafe.all
+      @cafes = Cafe.page(params[:page])
     end
   end
 
