@@ -16,8 +16,15 @@ class Public::CafesController < ApplicationController
   end
 
   def index
-    if params[:query].present?
-      @cafes = Cafe.search_by_name_or_address(params[:query])
+    if params[:query].present? && params[:tag].present?
+      @cafes = Cafe.joins(:tags)
+                   .where(tags: { name: params[:tag] })
+                   .where("cafes.name ILIKE ? OR cafes.address ILIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
+                   .page(params[:page])
+    elsif params[:query].present?
+      @cafes = Cafe.search_by_name_or_address(params[:query]).page(params[:page])
+    elsif params[:tag].present?
+      @cafes = Cafe.joins(:tags).where(tags: { name: params[:tag] }).page(params[:page])
     else
       @cafes = Cafe.page(params[:page])
     end
