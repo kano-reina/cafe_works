@@ -19,8 +19,4 @@ class Cafe < ApplicationRecord
     where('name LIKE ? OR address LIKE ?', "%#{query}%", "%#{query}%")
   }
   
-  def self.page(page_number)
-    Cafe.all.page(page_number)
-  end
-  
 end
