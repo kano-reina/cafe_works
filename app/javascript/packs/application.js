@@ -8,6 +8,11 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+import "jquery";
+import "popper.js";
+import "bootstrap";
+import "../stylesheet/application";
+
 window.$ = window.jQuery = require('jquery');
 
 import Raty from "../src/raty"
