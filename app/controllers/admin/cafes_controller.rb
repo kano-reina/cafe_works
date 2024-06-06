@@ -28,7 +28,7 @@ class Admin::CafesController < ApplicationController
   end
   
   def destroy
-    @cafe = Cafe.find(params[:id])
+    cafe = Cafe.find(params[:id])
     cafe.destroy
     redirect_to admin_cafes_path
   end
