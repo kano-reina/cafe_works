@@ -9,7 +9,9 @@
 </head>
 <body>
   <header>
-    <%= link_to "CAFE WORKS.", admin_cafes_path %>
+    <%= link_to root_path do %>
+      <%= image_tag 'logo.jpg', size: "150x150" %>
+    <% end %>
     <% if admin_signed_in? %>
       <ul>
         <%= link_to 'Cafes', admin_cafes_path %>
