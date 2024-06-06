@@ -48,4 +48,4 @@ Sun 9:00 AM - 12:00PM"
   
   <%= f.submit 'Update cafe' %>
 <% end %>
-<%= button_to 'Delete cafe', admin_cafe_path(@cafe), method: :delete, data: { confirm: "Are you sure you want to delete the cafe?" } %>
+<%= link_to 'Delete cafe', admin_cafe_path(@cafe), method: :delete, data: { confirm: "Are you sure you want to delete the cafe?" } %>
