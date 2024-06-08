@@ -33,6 +33,5 @@ Rails.application.routes.draw do
       end
     end
     
-    post 'cafes/category/:category', to: 'public/cafes#category', as: 'category_search'
   end
 end

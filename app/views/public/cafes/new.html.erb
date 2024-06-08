@@ -50,5 +50,11 @@ Sun 9:00 AM - 12:00PM"
   <p>About Cafe</p>
   <%= f.text_area :introduction %>
   
-  <%= f.submit 'Add cafe' %>
+  
+  <p>Tags</p>
+  <%= f.text_field :tag_names, placeholder:"cozyvibes,Koreanstyle,XXXcafe" %>
+  
+  <div>
+    <%= f.submit 'Add cafe' %>
+  </div>
 <% end %>

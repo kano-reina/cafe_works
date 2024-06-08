@@ -2,10 +2,16 @@
   <%= flash[:notice] %>
 </div>
 
-<div class="categories">
-  <h4>Search by your needs</h4>
-  <%= link_to 'Charge your Devices', category_search_path('charge') %>
-  <%= link_to 'Chat/Meeting', category_search_path('chat') %>
-  <%= link_to 'Focus', category_search_path('focus') %>
-  <%= link_to 'Free Acess to Wi-Fi', category_search_path('wifi') %>
+
+<div>
+  <% @top_tags.each do |tag| %>
+    <%= link_to tag.name, cafes_path(tag: tag.name) %>
+  <% end %>
+</div>
+
+<div>
+  <%= link_to 'Charge your devices', cafes_path(category: 'has_power_outlet') %>
+  <%= link_to 'Chat/Meeting', cafes_path(category: 'chat_meeting_ok') %>
+  <%= link_to 'Focus', cafes_path(category: 'quiet_environment') %>
+  <%= link_to 'Free Access to Wi-Fi', cafes_path(category: 'has_wifi') %>
 </div>

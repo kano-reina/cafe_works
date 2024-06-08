@@ -19,9 +19,19 @@ class Cafe < ApplicationRecord
     where('name LIKE ? OR address LIKE ?', "%#{query}%", "%#{query}%")
   }
   
-  scope :with_power_outlet, -> { where(has_power_outlet: true) }
-  scope :chat_ok, -> { where(chat_meeting_ok: true) }
-  scope :focus, -> { where(chat_meeting_ok: false) }
-  scope :with_wifi, -> { where(has_wifi: true) }
+  scope :filter_by_category, ->(category) {
+    case category
+    when 'has_power_outlet'
+      where(has_power_outlet: true)
+    when 'chat_meeting_ok'
+      where(chat_meeting_ok: true)
+    when 'quiet_environment'
+      where(chat_meeting_ok: false)
+    when 'has_wifi'
+      where(has_wifi: true)
+    else
+      all
+    end
+  }
   
 end

@@ -14,10 +14,12 @@ class Public::CafesController < ApplicationController
       render :new
     end
   end
-
+  
   def index
     if params[:query].present?
       @cafes = Cafe.search_by_name_or_address(params[:query]).page(params[:page])
+    elsif params[:category].present?
+      @cafes = Cafe.filter_by_category(params[:category]).page(params[:page])
     else
       @cafes = Cafe.page(params[:page])
     end
@@ -41,21 +43,6 @@ class Public::CafesController < ApplicationController
     else
       render :edit
     end
-  end
-  
-  def category
-  @cafes = case params[:category]
-           when 'charge'
-             Cafe.with_power_outlet
-           when 'chat'
-             Cafe.chat_ok
-           when 'focus'
-             Cafe.focus
-           when 'wifi'
-             Cafe.with_wifi
-           else
-             Cafe.none
-           end.page(params[:page])
   end
   
   private
