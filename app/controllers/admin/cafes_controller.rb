@@ -3,7 +3,7 @@ class Admin::CafesController < ApplicationController
   
   def index
     if params[:query].present?
-      @cafes = Cafe.search_by_name_or_address(params[:query])
+      @cafes = Cafe.search_by_name_or_address(params[:query]).page(params[:page])
     else
       @cafes = Cafe.page(params[:page])
     end
