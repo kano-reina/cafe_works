@@ -10,7 +10,7 @@
     <% if last_review.present? && last_review.image.attached? %>
       <%= image_tag last_review.image.variant(resize_to_limit: [500, 500]).processed %>
     <% else %>
-      <%= image_tag 'no_image.jpg', size: "500x500" %>
+      <%= image_tag 'logo.jpg', size: "500x500" %>
     <% end %>
   </div>
 <% end %>

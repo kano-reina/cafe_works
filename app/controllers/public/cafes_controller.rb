@@ -43,6 +43,21 @@ class Public::CafesController < ApplicationController
     end
   end
   
+  def category
+  @cafes = case params[:category]
+           when 'charge'
+             Cafe.with_power_outlet
+           when 'chat'
+             Cafe.chat_ok
+           when 'focus'
+             Cafe.focus
+           when 'wifi'
+             Cafe.with_wifi
+           else
+             Cafe.none
+           end.page(params[:page])
+  end
+  
   private
   def cafe_params
     params.require(:cafe).permit(:name, :address, :has_power_outlet, :chat_meeting_ok, :has_wifi, :opening_hours, :introduction)

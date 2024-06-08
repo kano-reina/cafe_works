@@ -32,5 +32,7 @@ Rails.application.routes.draw do
         resources :comments, only: [:create, :destroy]
       end
     end
+    
+    post 'cafes/category/:category', to: 'public/cafes#category', as: 'category_search'
   end
 end

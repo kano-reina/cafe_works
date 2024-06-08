@@ -2,5 +2,10 @@
   <%= flash[:notice] %>
 </div>
 
-<h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
+<div class="categories">
+  <h4>Search by your needs</h4>
+  <%= link_to 'Charge your Devices', category_search_path('charge') %>
+  <%= link_to 'Chat/Meeting', category_search_path('chat') %>
+  <%= link_to 'Focus', category_search_path('focus') %>
+  <%= link_to 'Free Acess to Wi-Fi', category_search_path('wifi') %>
+</div>
