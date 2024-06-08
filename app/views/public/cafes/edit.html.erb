@@ -46,5 +46,8 @@ Sun 9:00 AM - 12:00PM"
   <p>About Cafe</p>
   <%= f.text_area :introduction %>
   
+  <p>Tags</p>
+  <%= f.text_field :tag_list, placeholder:"cozyvibes,Koreanstyle,XXXcafe" %>
+  
   <%= f.submit 'Update cafe' %>
 <% end %>

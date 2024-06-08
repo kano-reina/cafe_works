@@ -34,4 +34,16 @@ class Cafe < ApplicationRecord
     end
   }
   
+  attr_accessor :tag_list
+
+  after_save :save_tags
+
+  def save_tags
+    if tag_list
+      self.tags = tag_list.split(',').map do |tag_name|
+        Tag.find_or_create_by(name: tag_name.strip)
+      end
+    end
+  end
+  
 end

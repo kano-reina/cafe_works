@@ -20,6 +20,8 @@ class Public::CafesController < ApplicationController
       @cafes = Cafe.search_by_name_or_address(params[:query]).page(params[:page])
     elsif params[:category].present?
       @cafes = Cafe.filter_by_category(params[:category]).page(params[:page])
+    elsif params[:tag].present?
+      @cafes = Cafe.joins(:tags).where(tags: { name: params[:tag] }).page(params[:page])
     else
       @cafes = Cafe.page(params[:page])
     end
@@ -47,7 +49,7 @@ class Public::CafesController < ApplicationController
   
   private
   def cafe_params
-    params.require(:cafe).permit(:name, :address, :has_power_outlet, :chat_meeting_ok, :has_wifi, :opening_hours, :introduction)
+    params.require(:cafe).permit(:name, :address, :has_power_outlet, :chat_meeting_ok, :has_wifi, :opening_hours, :introduction, :tag_list)
   end
   
 end
