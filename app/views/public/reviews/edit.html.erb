@@ -1,21 +1,66 @@
-<h2><%= @cafe.name %></h2>
+<div class="container">  
+  <% if @review.errors.any? %>
+    <ul class="pb-3">
+      <% @review.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
 
-<%= form_with(model: @review, url: cafe_review_path(@cafe)) do |form| %>
-  <div>
-    <%= form.select :rating, options_for_select(1..5, @review.rating) %>
+  <div class="pt-5">
+    <h2><%= @cafe.name %></h2>
+    
+    <%= form_with(model: @review, url: cafe_review_path(@cafe)) do |form| %>
+      <div id="review_rating" class="pt-3 pb-3">
+        <%= form.hidden_field :rating %>
+      </div>
+      
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-2">
+            <%= form.label :image, "Image" %>
+          </div>
+          
+          <div class="col-md-10">
+            <div class="pb-2">
+              <%= image_tag @review.image, class: "img-thumbnail", size: "150x150" %>
+            </div>
+            <%= form.file_field :image, accept: "image/*" %>
+          </div>
+        </div>
+      </div>  
+  
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-2">
+            <%= form.label :body, "Comment" %>
+          </div>
+          <div class="col-md-10">
+            <%= form.text_area :body, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="pt-5 text-center">
+        <%= form.submit 'Update review', class: "btn btn-light border border-dark" %>
+      </div>
+    <% end %>
+    
+    <script>
+      var elem = document.getElementById('review_rating');
+      var opt = {  
+          starOn: "<%= asset_path('star-on.png') %>",
+          starOff: "<%= asset_path('star-off.png') %>",
+          half: false,
+          scoreName: 'review[rating]',
+          score: <%= @review.rating %>
+        };
+      if (elem) elem.innerHTML = ""
+      raty(elem, opt);
+    </script>
+    
+    <div class="pt-3 pb-5 text-center">
+      <%= button_to 'Delete review', cafe_review_path(@cafe), method: :delete, data: { confirm: "Are you sure you want to delete your review?" }, class: "btn btn-light border border-dark" %>
+    </div>
   </div>
-  <div>
-    <%= form.label :image, "Image" %>
-    <%= form.file_field :image, accept: "image/*" %>
-  </div>
-  <div>
-    <%= form.label :body, "Comment" %>
-    <%= form.text_area :body %>
-  </div>
-  <div>
-    <%= form.submit 'Update review' %>
-  </div>
-<% end %>
-<div>
-  <%= button_to 'Delete review', cafe_review_path(@cafe), method: :delete, data: { confirm: "Are you sure you want to delete your review?" } %>
 </div>

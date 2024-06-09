@@ -21,8 +21,8 @@ class Public::ReviewsController < ApplicationController
   end
   
   def update
-    review = Review.find(params[:id])
-    if review.update(review_params)
+    @review = Review.find(params[:id])
+    if @review.update(review_params)
       flash[:notice] = "You have updated review successfully."
       redirect_to cafe_path(@cafe)
     else
