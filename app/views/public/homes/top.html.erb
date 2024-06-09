@@ -3,39 +3,39 @@
     <div class="justify-center align-items-center mx-auto pt-5">
       <div class="text-center">
         <%= form_with url: cafes_path, method: :get, local: true do |form| %>
-          <%= form.text_field :query, value: params[:query], plcaeholder:"cafe name, location", style: "width: 300px;" %>
+          <%= form.text_field :query, value: params[:query], placeholder:"cafe name, location", style: "width: 300px;" %>
           <%= form.submit 'Search' %>
         <% end %>
       </div>
 
-      <div class="pl-5">
+      <div class="text-center">
         <% Tag.top_tags.each do |tag| %>
-          <%= link_to tag.name, cafes_path(tag: tag.name) %>
+          <%= link_to tag.name, cafes_path(tag: tag.name), class: "tag-link"%>
         <% end %>
       </div>
       
-      <div class="pt-5">
+      <div class="pt-4">
         <hr class="w-200 border-top">
-        <h6 class="text-center">Search by your needs</h6>
-        <div class="d-flex d-grid grid-cols-3 gap-2 justify-content-center">
-          <div class="text-center">
-            <div class="p-3 border">
-              <%= link_to 'Charge your devices', cafes_path(category: 'has_power_outlet') %>
+        <h6 class="text-center pt-3">Search by your needs</h6>
+        <div class="d-flex flex-wrap d-grid grid-cols-3 gap-2 justify-content-center pt-4">
+          <div class="box p-3">
+            <div class="p-3">
+              <%= link_to 'Charge your devices', cafes_path(category: 'has_power_outlet'), class:"box text-center" %>
             </div>
           </div>
-          <div class="text-center">
-            <div class="p-3 border">
-              <%= link_to 'Chat/Meeting', cafes_path(category: 'chat_meeting_ok') %>
+          <div class="box">
+            <div class="p-3">
+              <%= link_to 'Chat/Meeting', cafes_path(category: 'chat_meeting_ok'), class:"box text-center" %>
             </div>
           </div>
-          <div class="text-center">
-            <div class="p-3 border">
-              <%= link_to 'Focus', cafes_path(category: 'quiet_environment') %>
+          <div class="box">
+            <div class="p-3">
+              <%= link_to 'Focus', cafes_path(category: 'quiet_environment'), class:"box text-center" %>
             </div>
           </div>
-          <div class="text-center">
-            <div class="p-3 border">
-              <%= link_to 'Free Access to Wi-Fi', cafes_path(category: 'has_wifi') %>
+          <div class="box">
+            <div class="p-3">
+              <%= link_to 'Free Access to Wi-Fi', cafes_path(category: 'has_wifi'), class:"box text-center" %>
             </div>
           </div>
         </div>

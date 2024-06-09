@@ -1,7 +1,13 @@
-<%= form_with url: cafes_path, method: :get, local: true do |form| %>
+<%= form_with url: admin_cafes_path, method: :get, local: true do |form| %>
   <%= form.text_field :query, value: params[:query], plcaeholder:"cafe name, location" %>
   <%= form.submit 'Search' %>
 <% end %>
+
+<div>
+   <% Tag.top_tags.each do |tag| %>
+    <%= link_to tag.name, admin_cafes_path(tag: tag.name) %>
+  <% end %>
+</div>
 
 <% @cafes.each do |cafe| %>
   <p><%= link_to cafe.name, admin_cafe_path(cafe.id) %></p>

@@ -57,11 +57,11 @@
 
 <h3>Detail Information</h3>
 <p>Address <%= @cafe.address %></p>
-<p>About Cafe <%= @cafe.introduction %></p>
+<p>About Cafe <%= simple_format(@cafe.introduction) %></p>
 <% @cafe.tags.each do |tag| %>
   <%= link_to tag.name, cafes_path(tag: tag.name) %>
 <% end %>
-<p>Opening Hours <%= @cafe.opening_hours %></p>
+<p>Opening Hours <%= simple_format(@cafe.opening_hours) %></p>
 <% if user_signed_in? %>
   <%= link_to "Edit info", edit_cafe_path(@cafe) %>
 <% end %>

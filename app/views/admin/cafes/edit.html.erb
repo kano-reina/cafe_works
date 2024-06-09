@@ -1,51 +1,102 @@
-<% if @cafe.errors.any? %>
-  <ul>
-    <% @cafe.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+<div class="container">
+  <% if @cafe.errors.any? %>
+    <ul class="pb-3">
+      <% @cafe.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div class="pt-5">
+    <%= form_with model: @cafe, url: admin_cafe_path(@cafe) do |f| %>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-2">
+            <p>Cafe Name</p>
+          </div>
+          <div class="col-md-10">
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+    
+       <div class="form-group">
+        <div class="row">
+          <div class="col-md-2">
+            <p>Categories</p>
+          </div>
+          <div class="col-md-10">
+            <p>Charge your phone/PC</p>
+            <%= f.radio_button :has_power_outlet, true %>
+            <%= f.label :has_power_outlet_true, "available", class: "mr-2" %>
+            <%= f.radio_button :has_power_outlet, false %>
+            <%= f.label :has_power_outlet_false, "N/A" %>
+            
+            <p>Environment</p>
+            <%= f.radio_button :chat_meeting_ok, true, checked: @cafe.chat_meeting_ok %>
+            <%= f.label :chat_meeting_ok_true, "Chat/Meeting OK", class: "mr-2" %>
+            <%= f.radio_button :chat_meeting_ok, false, checked: !@cafe.chat_meeting_ok %>
+            <%= f.label :chat_meeting_ok_false, "Quiet Environment" %>
+            
+            <p>Wifi</p>
+            <%= f.radio_button :has_wifi, true, checked: @cafe.has_wifi %>
+            <%= f.label :has_wifi_true, "available", class: "mr-2" %>
+            <%= f.radio_button :has_wifi, false, checked: !@cafe.has_wifi %>
+            <%= f.label :has_wifi_false, "N/A" %>
+          </div>
+        </div>
+      </div>
+    
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-2">
+            <p>Address</p>
+          </div>
+          <div class="col-md-10">
+            <%= f.text_field :address, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-2">
+            <p>Opening Hours</p>
+          </div>
+          <div class="col-md-10">
+            <%= f.text_area :opening_hours, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-2">
+            <p>About Cafe</p>
+          </div>
+          <div class="col-md-10">
+            <%= f.text_area :introduction, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-2">
+            <p>Tags</p>
+          </div>
+          <div class="col-md-10">
+            <%= f.text_field :tag_list, placeholder:"cozyvibes,Koreanstyle,XXXcafe", class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="pt-5 text-center">
+        <%= f.submit 'Update cafe', class: "btn btn-light border border-dark" %>
+      </div>
     <% end %>
-  </ul>
-<% end %>
-
-<%= form_with model: @cafe, url: admin_cafe_path(@cafe) do |f| %>
-  <p>Cafe Name</p>
-  <%= f.text_field :name %>
-
-  <p>Categories</p>
-  <p>Charge your phone/PC</p>
-  <%= f.radio_button :has_power_outlet, true %>
-  <%= f.label :has_power_outlet_true, "available" %>
-  <%= f.radio_button :has_power_outlet, false %>
-  <%= f.label :has_power_outlet_false, "N/A" %>
-  
-  <p>Environment</p>
-  <%= f.radio_button :chat_meeting_ok, true %>
-  <%= f.label :chat_meeting_ok_true, "Chat/Meeting OK" %>
-  <%= f.radio_button :chat_meeting_ok, false %>
-  <%= f.label :chat_meeting_ok_false, "Quiet Environment" %>
-  
-  <p>Wifi</p>
-  <%= f.radio_button :has_wifi, true %>
-  <%= f.label :has_wifi_true, "available" %>
-  <%= f.radio_button :has_wifi, false %>
-  <%= f.label :has_wifi_false, "N/A" %>
-
-  <p>Address</p>
-  <%= f.text_field :address, placeholder:"東京都新宿区新宿３丁目１ー１ー１" %>
-  
-  <p>Opening Hours</p>
-  <%= f.text_area :opening_hours, placeholder:
-    "Mon 9:00 AM - 12:00PM, 3:00PM - 8:00 PM
-Tue 9:00 AM - 12:00PM
-Wed 9:00 AM - 12:00PM
-Thu 9:00 AM - 12:00PM
-Fri 9:00 AM - 12:00PM
-Sat 9:00 AM - 12:00PM
-Sun 9:00 AM - 12:00PM"
-  %>
-  
-  <p>About Cafe</p>
-  <%= f.text_area :introduction %>
-  
-  <%= f.submit 'Update cafe' %>
-<% end %>
-<%= link_to 'Delete cafe', admin_cafe_path(@cafe), method: :delete, data: { confirm: "Are you sure you want to delete the cafe?" } %>
+    <div class="pt-3 pb-5 text-center">
+      <%= link_to 'Delete cafe', admin_cafe_path(@cafe), method: :delete, data: { confirm: "Are you sure you want to delete the cafe?" }, class: "btn btn-light border border-dark" %>
+    </div>
+  </div>
+</div>

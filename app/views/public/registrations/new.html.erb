@@ -1,21 +1,27 @@
-<h2>Sign up</h2>
-
-<%= form_with model: @user, url: user_registration_path do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.text_field :name, autofocus: true, placeholder:"User Name" %>
+<div class="container text-center">
+  
+  <h2 class="pt-5">Sign up</h2>
+  
+  <div class="pt-3">
+    <%= form_with model: @user, url: user_registration_path do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+    
+      <div class="field pt-3">
+        <%= f.text_field :name, autofocus: true, placeholder:"User Name", style: "width: 250px;" %>
+      </div>
+    
+      <div class="field pt-3">
+        <%= f.email_field :email, autocomplete: "email", placeholder:"Email", style: "width: 250px;" %>
+      </div>
+    
+      <div class="field pt-3">
+        <%= f.password_field :password, autocomplete: "new-password", placeholder:"Password", style: "width: 250px;" %>
+      </div>
+    
+      <div class="actions pt-5">
+        <%= f.submit "Sign up", class: "btn btn-light border border-dark" %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.email_field :email, autocomplete: "email", placeholder:"Email" %>
-  </div>
-
-  <div class="field">
-    <%= f.password_field :password, autocomplete: "new-password", placeholder:"Password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+  
+</div>

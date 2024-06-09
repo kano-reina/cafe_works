@@ -38,10 +38,10 @@ class Public::CafesController < ApplicationController
   end
   
   def update
-    cafe = Cafe.find(params[:id])
-    if cafe.update(cafe_params)
+    @cafe = Cafe.find(params[:id])
+    if @cafe.update(cafe_params)
       flash[:notice] = "You have updated cafe successfully."
-      redirect_to cafe_path(cafe)
+      redirect_to cafe_path(@cafe)
     else
       render :edit
     end
