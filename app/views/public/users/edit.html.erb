@@ -1,24 +1,28 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-      <h4>Edit Profile</h4>
-      <%= form_with model: @user do |f| %>
-        <div class="form-group">
-          <%= f.file_field :profile_image, accept: "image/*" %>
+<div class="container text-center">
+  
+  <h2 class="pt-3">Edit Profile</h2>
+  
+  <div class="pt-2">
+    <%= form_with model: @user do |f| %>
+      <div class="field">
+        <div class="pb-2">
+          <%= image_tag @user.profile_image, class: "rounded-circle img-thumbnail", size: "80x80" %>
         </div>
-        <div class="form-group">
-          <%= f.text_field :name, autofocus: true, placeholder:"User Name", class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= f.email_field :email, autocomplete: "email", placeholder:"Email" %>
-        </div>
-        <div class="form-group">
-           <%= f.submit 'Update account', name: 'update' %>
-        </div>
-      <% end %>
-      <div class="form-group">
-        <%= button_to 'Delete account', user_path(@user), method: :delete, data: { confirm: "Are you sure you want to delete your account?" } %>
+        <%= f.file_field :profile_image, accept: "image/*" %>
       </div>
+      <div class="field pt-3">
+        <%= f.text_field :name, autofocus: true, placeholder:"User Name", style: "width: 250px;" %>
+      </div>
+      <div class="field pt-3">
+        <%= f.email_field :email, autocomplete: "email", placeholder:"Email", style: "width: 250px;" %>
+      </div>
+      <div class="field pt-4">
+         <%= f.submit 'Update account', name: 'update', class: "btn btn-light border border-dark" %>
+      </div>
+    <% end %>
+    <div class="actions pt-3">
+      <%= button_to 'Delete account', user_path(@user), method: :delete, data: { confirm: "Are you sure you want to delete your account?" }, class: "btn btn-light border border-dark" %>
     </div>
   </div>
+
 </div>
