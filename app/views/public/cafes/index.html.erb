@@ -1,34 +1,41 @@
 <div class="container">
-  <div class="row">
-    <div class="justify-center align-items-center mx-auto pt-5">
-      <div class="text-center">
-        <%= form_with url: cafes_path, method: :get, local: true do |form| %>
-          <%= form.text_field :query, value: params[:query], placeholder:"cafe name, location", style: "width: 300px;" %>
-          <%= form.submit 'Search' %>
-        <% end %>
-      </div>
+  <div class="justify-center align-items-center mx-auto pt-5">
+    <div class="text-center">
+      <%= form_with url: cafes_path, method: :get, local: true do |form| %>
+        <%= form.text_field :query, value: params[:query], placeholder:"cafe name, location", style: "width: 300px;" %>
+        <%= form.submit 'Search' %>
+      <% end %>
     </div>
+  </div>
 
-    <div>
-      <% @cafes.each do |cafe| %>
-        <div class="col-md-4">
-          <div class="card w-50 mx-auto mt-4 shadow-lg">
-            <div class="card-body">
-              <h5 class="card-title"><%= link_to cafe.name, cafe_path(cafe.id) %></h5>
-              <div class="card-img-top">
-                <% last_review = cafe.reviews.order(created_at: :desc).first %>
-                <% if last_review.present? && last_review.image.attached? %>
-                  <%= image_tag last_review.image.variant(resize_to_limit: [500, 500]).processed %>
-                <% else %>
-                  <%= image_tag 'logo.jpg', size: "500x500" %>
-                <% end %>
-              </div>
+  <div class="container pt-3">
+    <div class="row">
+      <% @cafes.each_with_index do |cafe, index| %>
+        <div class="col-md-4 mb-4">
+          <div class="card mx-auto mt-4 shadow-lg">
+            <div class="fixed-image-height">
+              <% last_review = cafe.reviews.order(created_at: :desc).first %>
+              <% if last_review.present? && last_review.image.attached? %>
+                <%= image_tag last_review.image.variant(resize_to_limit: [500, 500]).processed, class: "img-fluid" %>
+              <% else %>
+                <%= image_tag 'logo.jpg', size: "400x400", class: "img-fluid" %>
+              <% end %>
+            </div>
+            <div class="card-body text-center">
+              <h5 class="card-title"><%= link_to cafe.name, cafe_path(cafe.id), class:"text-dark" %></h5>
             </div>
           </div>
         </div>
+  
+        <% if (index + 1) % 3 == 0 %>
+          </div><div class="row">
+        <% end %>
       <% end %>
-    </div>    
- 
+    </div>
+  </div>
+
+
+
    <div>
      <%= paginate @cafes %>
    </div>   

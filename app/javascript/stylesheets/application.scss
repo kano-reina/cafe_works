@@ -45,3 +45,16 @@ body {
 .opening-hours {
   text-align: left;
 }
+
+.fixed-image-height {
+  height: 300px; /* 画像の固定高さを設定 */
+  overflow: hidden; /* はみ出た部分を隠す */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fixed-image-height img {
+  object-fit: cover; /* 画像をコンテナにフィットさせる */
+  height: 100%;
+}
