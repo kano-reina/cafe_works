@@ -1,22 +1,44 @@
 <div class="container">
-  <div class="row">
-    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-      <%= form_with model: @user, url:admin_user_path(@user) do |f| %>
-        <div class="form-group">
-          <%= f.label :id, "User ID" %>
-          <%= @user.id %>
+  
+  <div class="pt-5 d-flex justify-content-center">
+    <%= form_with model: @user, url:admin_user_path(@user) do |f| %>
+      
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-2">
+            <%= f.label :id, "User ID" %>
+          </div>
+          <div class="col-md-10">
+            <%= @user.id %>
+          </div>
         </div>
-        <div class="form-group">
-          <%= f.label :name, "User Name" %>
-          <%= f.text_field :name, autofocus: true, placeholder:"User Name", class: "form-control" %>
+      </div>
+      
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-2">
+            <%= f.label :name, "User Name", style: "white-space: nowrap;" %>
+          </div>
+          <div class="col-md-10">
+            <%= f.text_field :name, autofocus: true, placeholder:"User Name", class: "form-control", style: "width: 500px" %>
+          </div>
         </div>
-        <div class="form-group">
-          <%= f.email_field :email, autocomplete: "email", placeholder:"Email" %>
+      </div>
+      
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-2">
+            <%= f.label :email, "Email" %>
+          </div>
+          <div class="col-md-10">
+            <%= f.email_field :email, autocomplete: "email", placeholder:"Email", class: "form-control", style: "width: 500px" %>
+          </div>
         </div>
-        <div class="form-group">
-           <%= f.submit 'Update', name: 'update' %>
-        </div>
-      <% end %>
-    </div>
+      </div>
+    
+      <div class="pt-5 text-center">
+        <%= f.submit 'Update', name: 'update', class: "btn btn-light border border-dark" %>
+      </div>
+    <% end %>
   </div>
 </div>
