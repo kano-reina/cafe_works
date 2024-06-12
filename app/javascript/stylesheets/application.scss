@@ -46,15 +46,14 @@ body {
   text-align: left;
 }
 
-.fixed-image-height {
-  height: 300px; /* 画像の固定高さを設定 */
-  overflow: hidden; /* はみ出た部分を隠す */
+.image {
+  height: 300px; 
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.fixed-image-height img {
-  object-fit: cover; /* 画像をコンテナにフィットさせる */
+.image img {
+  object-fit: cover; 
   height: 100%;
 }
