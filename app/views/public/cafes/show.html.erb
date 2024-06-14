@@ -1,59 +1,58 @@
-<div>
-  <% last_review = @cafe.reviews.order(created_at: :desc).first %>
-  <% if last_review.present? && last_review.image.attached? %>
-    <%= image_tag last_review.image.variant(resize_to_limit: [500, 500]).processed %>
-  <% else %>
-    <%= image_tag 'white.png', size: "500x500" %>
-  <% end %>
-</div>
-<h1><%= @cafe.name %></h1>
-<div>
-  <% if user_signed_in? %>
-    <% if current_user.email != "guest@example.com" %>
-      <% if @cafe.bookmarks.exists?(user_id: current_user.id) %>
-        <p><%= link_to "Remove bookmark", cafe_bookmark_path(@cafe), method: :delete %></p>
+<div class="cafe-background" style="background-image: url('<%= @cafe.reviews.order(created_at: :desc).first&.image&.attached? ? url_for(@cafe.reviews.order(created_at: :desc).first.image.variant(resize_to_limit: [1200, 800]).processed) : asset_path('white.png') %>');">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+      <h1 class="pt-5"><%= @cafe.name %></h1>
+      <div>
+        <% if user_signed_in? %>
+          <% if current_user.email != "guest@example.com" %>
+            <% if @cafe.bookmarks.exists?(user_id: current_user.id) %>
+              <p><%= link_to "Remove bookmark", cafe_bookmark_path(@cafe), method: :delete %></p>
+            <% else %>
+              <p><%= link_to "Bookmark", cafe_bookmark_path(@cafe), method: :post %></p>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div>
+      <% if @cafe.has_power_outlet? %>
+        <p>Available</p>
       <% else %>
-        <p><%= link_to "Bookmark", cafe_bookmark_path(@cafe), method: :post %></p>
+        <p>N/A</p>
       <% end %>
-    <% end %>
-  <% end %>
-</div>
-<div>
-  <% if @cafe.has_power_outlet? %>
-    <p>Available</p>
-  <% else %>
-    <p>N/A</p>
-  <% end %>
-</div>
-<div>
-  <% if @cafe.chat_meeting_ok? %>
-    <p>Chat/Meeting OK</p>
-  <% else %>
-    <p>Quiet Environment</p>
-  <% end %>
-</div>
-<div>
-  <% if @cafe.has_wifi? %>
-    <p>Available</p>
-  <% else %>
-    <p>N/A</p>
-  <% end %>
+    </div>
+    <div>
+      <% if @cafe.chat_meeting_ok? %>
+        <p>Chat/Meeting OK</p>
+      <% else %>
+        <p>Quiet Environment</p>
+      <% end %>
+    </div>
+    <div>
+      <% if @cafe.has_wifi? %>
+        <p>Available</p>
+      <% else %>
+        <p>N/A</p>
+      <% end %>
+    </div>
+
+    <div id="average_rating">
+      <script>
+        var elem = document.getElementById('average_rating');
+        var opt = {  
+          starOn: "<%= asset_path('star-on.png') %>",
+          starOff: "<%= asset_path('star-off.png') %>",
+          half: false,
+          readOnly: true,
+          score: <%= @average_rating %>,
+        };
+        if (elem) elem.innerHTML = ""
+        raty(elem, opt);
+      </script>
+    </div>
+  </div>
 </div>
 
-<div id="average_rating">
-  <script>
-    var elem = document.getElementById('average_rating');
-    var opt = {  
-      starOn: "<%= asset_path('star-on.png') %>",
-      starOff: "<%= asset_path('star-off.png') %>",
-      half: false,
-      readOnly: true,
-      score: <%= @average_rating %>,
-    };
-    if (elem) elem.innerHTML = ""
-    raty(elem, opt);
-  </script>
-</div>
 
 <h3>Detail Information</h3>
 <p>Address <%= @cafe.address %></p>
