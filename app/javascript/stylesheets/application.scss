@@ -57,3 +57,11 @@ body {
   object-fit: cover; 
   height: 100%;
 }
+
+.pagination a, .pagination span {
+  color: black; 
+}
+
+.pagination a:hover, .pagination span:hover {
+  color: #000000;
+}
