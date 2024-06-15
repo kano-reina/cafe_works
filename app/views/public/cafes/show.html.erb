@@ -1,69 +1,72 @@
 <div class="cafe-background" style="background-image: url('<%= @cafe.reviews.order(created_at: :desc).first&.image&.attached? ? url_for(@cafe.reviews.order(created_at: :desc).first.image.variant(resize_to_limit: [1200, 800]).processed) : asset_path('white.png') %>');">
-  <div class="container">
-    <div class="d-flex justify-content-between align-items-center">
-      <h1 class="pt-5"><%= @cafe.name %></h1>
-      <div>
-        <% if user_signed_in? %>
-          <% if current_user.email != "guest@example.com" %>
-            <% if @cafe.bookmarks.exists?(user_id: current_user.id) %>
-              <p><%= link_to "Remove bookmark", cafe_bookmark_path(@cafe), method: :delete %></p>
-            <% else %>
-              <p><%= link_to "Bookmark", cafe_bookmark_path(@cafe), method: :post %></p>
+  <div class="overlay">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <h1 class="pt-5 pb-3"><%= @cafe.name %></h1>
+        <div class="pt-4">
+          <% if user_signed_in? %>
+            <% if current_user.email != "guest@example.com" %>
+              <% if @cafe.bookmarks.exists?(user_id: current_user.id) %>
+                <p><%= link_to "Remove bookmark", cafe_bookmark_path(@cafe), method: :delete, class: "btn btn-light border border-dark" %></p>
+              <% else %>
+                <p><%= link_to "Bookmark", cafe_bookmark_path(@cafe), method: :post, class: "btn btn-light border border-dark" %></p>
+              <% end %>
             <% end %>
           <% end %>
+        </div>
+      </div>
+      <div>
+        <% if @cafe.has_power_outlet? %>
+          <p><i class="fa-solid fa-plug pr-4"></i>Available</p>
+        <% else %>
+          <p><i class="fa-solid fa-plug pr-4"></i>N/A</p>
         <% end %>
       </div>
-    </div>
-    <div>
-      <% if @cafe.has_power_outlet? %>
-        <p>Available</p>
-      <% else %>
-        <p>N/A</p>
-      <% end %>
-    </div>
-    <div>
-      <% if @cafe.chat_meeting_ok? %>
-        <p>Chat/Meeting OK</p>
-      <% else %>
-        <p>Quiet Environment</p>
-      <% end %>
-    </div>
-    <div>
-      <% if @cafe.has_wifi? %>
-        <p>Available</p>
-      <% else %>
-        <p>N/A</p>
-      <% end %>
-    </div>
+      <div>
+        <% if @cafe.chat_meeting_ok? %>
+          <p><i class="fa-solid fa-volume-high icon pr-3"></i>Chat/Meeting OK</p>
+        <% else %>
+          <p><i class="fa-solid fa-volume-high icon pr-3"></i>Quiet Environment</p>
+        <% end %>
+      </div>
+      <div>
+        <% if @cafe.has_wifi? %>
+          <p><i class="fa-solid fa-wifi icon pr-3"></i>Available</p>
+        <% else %>
+          <p><i class="fa-solid fa-wifi icon pr-3"></i>N/A</p>
+        <% end %>
+      </div>
 
-    <div id="average_rating">
-      <script>
-        var elem = document.getElementById('average_rating');
-        var opt = {  
-          starOn: "<%= asset_path('star-on.png') %>",
-          starOff: "<%= asset_path('star-off.png') %>",
-          half: false,
-          readOnly: true,
-          score: <%= @average_rating %>,
-        };
-        if (elem) elem.innerHTML = ""
-        raty(elem, opt);
-      </script>
+      <div id="average_rating" class="pt-3">
+        <script>
+          var elem = document.getElementById('average_rating');
+          var opt = {  
+            starOn: "<%= asset_path('star-on.png') %>",
+            starOff: "<%= asset_path('star-off.png') %>",
+            half: false,
+            readOnly: true,
+            score: <%= @average_rating %>,
+          };
+          if (elem) elem.innerHTML = ""
+          raty(elem, opt);
+        </script>
+      </div>
     </div>
   </div>
 </div>
 
-
-<h3>Detail Information</h3>
-<p>Address <%= @cafe.address %></p>
-<p>About Cafe <%= simple_format(@cafe.introduction) %></p>
-<% @cafe.tags.each do |tag| %>
-  <%= link_to tag.name, cafes_path(tag: tag.name) %>
-<% end %>
-<p>Opening Hours <%= simple_format(@cafe.opening_hours) %></p>
-<% if user_signed_in? %>
-  <%= link_to "Edit info", edit_cafe_path(@cafe) %>
-<% end %>
+<div>
+  <h6 class="text-center pt-5">Detail Information</h6>
+  <p>Address <%= @cafe.address %></p>
+  <p>About Cafe <%= simple_format(@cafe.introduction) %></p>
+  <% @cafe.tags.each do |tag| %>
+    <%= link_to tag.name, cafes_path(tag: tag.name) %>
+  <% end %>
+  <p>Opening Hours <%= simple_format(@cafe.opening_hours) %></p>
+  <% if user_signed_in? %>
+    <%= link_to "Edit info", edit_cafe_path(@cafe) %>
+  <% end %>
+</div>
 
 <h3>Reviews</h3>
 <% if user_signed_in? %>
