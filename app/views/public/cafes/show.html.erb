@@ -106,72 +106,74 @@
     </div>
   </div>
 
-<% @cafe.reviews.each do |review| %>
-  <div class="d-flex justify-content-between align-items-center">
-    <div class="pt-3 pb-3 user">
-      <%= link_to user_path(review.user_id) do %>
-        <%= image_tag review.user.get_profile_image(35,35), class: "rounded-circle img-thumbnail" %>
-        <span class="pl-2 text-dark"><%= review.user.name %></span>
-      <% end %>
-    </div>
-    <div class="pt-3">
-      <% if user_signed_in? %>
-        <% if review.user == current_user %>
-          <p><%= link_to "Edit", edit_cafe_review_path(@cafe, review), class: "btn btn-light border border-dark" %></p>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-    
-  <div id="review_rating_<%= review.id %>">
-    <script>
-      var elem = document.getElementById('review_rating_<%= review.id %>');
-      var opt = {  
-          starOn: "<%= asset_path('star-on.png') %>",
-          starOff: "<%= asset_path('star-off.png') %>",
-          half: false,
-          readOnly: true,
-          score: <%= review.rating %>,
-        };
-      if (elem) elem.innerHTML = ""
-      raty(elem, opt);
-    </script>
-  </div>
-  
-  <div class="pt-2">
-    <%= review.body %>
-  </div>
-  
-  <div class="pt-2">
-    <%= image_tag review.image, size: "100x100" %>
-  </div>
-  
-  
   <div>
-    <% review.comments.each do |comment| %>
-      <p>
-        <%= link_to user_path(comment.user_id) do %>
-          <%= image_tag comment.user.get_profile_image(100,100) %>
-        <% end %>
-        <%= comment.comment %>
-        <% if user_signed_in? %>
-          <% if comment.user == current_user %>
-            <%= button_to 'Delete', cafe_review_comment_path(@cafe, review, comment), method: :delete, data: { confirm: "Are you sure you want to delete your comment?" } %>
+    <% @cafe.reviews.each do |review| %>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="pt-3 pb-3 user">
+          <%= link_to user_path(review.user_id) do %>
+            <%= image_tag review.user.get_profile_image(35,35), class: "rounded-circle img-thumbnail" %>
+            <span class="pl-2 text-dark"><%= review.user.name %></span>
           <% end %>
+        </div>
+        <div class="pt-3">
+          <% if user_signed_in? %>
+            <% if review.user == current_user %>
+              <p><%= link_to "Edit", edit_cafe_review_path(@cafe, review), class: "btn btn-light border border-dark" %></p>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+        
+      <div id="review_rating_<%= review.id %>">
+        <script>
+          var elem = document.getElementById('review_rating_<%= review.id %>');
+          var opt = {  
+              starOn: "<%= asset_path('star-on.png') %>",
+              starOff: "<%= asset_path('star-off.png') %>",
+              half: false,
+              readOnly: true,
+              score: <%= review.rating %>,
+            };
+          if (elem) elem.innerHTML = ""
+          raty(elem, opt);
+        </script>
+      </div>
+      
+      <div class="pt-2">
+        <%= review.body %>
+      </div>
+      
+      <div class="pt-2">
+        <%= image_tag review.image, size: "100x100" %>
+      </div>
+      
+      
+      <div>
+        <% review.comments.each do |comment| %>
+          <p class="pt-3">
+            <%= link_to user_path(comment.user_id) do %>
+              <%= image_tag comment.user.get_profile_image(25,25), class: "rounded-circle img-thumbnail" %>
+            <% end %>
+            <%= comment.comment %>
+            <% if user_signed_in? %>
+              <% if comment.user == current_user %>
+                <%= button_to 'Delete', cafe_review_comment_path(@cafe, review, comment), method: :delete, data: { confirm: "Are you sure you want to delete your comment?" }, class: "btn btn-light border border-dark" %>
+              <% end %>
+            <% end %>
+          </p>
         <% end %>
-      </p>
+      </div>
+      <div>
+        <% if user_signed_in? %>
+          <%= form_with model: @comment, url: cafe_review_comments_path(review.cafe_id, review) do |f| %>
+            <% if current_user.email != "guest@example.com" %>
+              <%= image_tag current_user.get_profile_image(25,25), class: "rounded-circle img-thumbnail" %>
+              <%= f.text_field :comment, placeholder:"Write a Comment" %>
+              <%= f.submit 'Post' %>
+            <% end %>
+          <% end %>  
+        <% end %>
+      </div>
     <% end %>
   </div>
-  <div>
-    <% if user_signed_in? %>
-      <%= form_with model: @comment, url: cafe_review_comments_path(review.cafe_id, review) do |f| %>
-        <% if current_user.email != "guest@example.com" %>
-          <%= image_tag current_user.get_profile_image(100,100) %>
-          <%= f.text_field :comment, placeholder:"Write a Comment" %>
-          <%= f.submit 'Post' %>
-        <% end %>
-      <% end %>  
-    <% end %>
-  </div>
-<% end %>
 </div>
