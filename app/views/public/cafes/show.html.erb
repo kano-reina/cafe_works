@@ -55,30 +55,74 @@
   </div>
 </div>
 
-<div>
-  <h6 class="text-center pt-5">Detail Information</h6>
-  <p>Address <%= @cafe.address %></p>
-  <p>About Cafe <%= simple_format(@cafe.introduction) %></p>
-  <% @cafe.tags.each do |tag| %>
-    <%= link_to tag.name, cafes_path(tag: tag.name) %>
-  <% end %>
-  <p>Opening Hours <%= simple_format(@cafe.opening_hours) %></p>
-  <% if user_signed_in? %>
-    <%= link_to "Edit info", edit_cafe_path(@cafe) %>
-  <% end %>
-</div>
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center">
+    <h6 class="pt-3 pb-3 flex-grow-1 text-center">Detail Information</h6>
+    <div class="pt-3">
+      <% if user_signed_in? %>
+        <p><%= link_to "Edit info", edit_cafe_path(@cafe), class: "btn btn-light border border-dark" %></p>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-6">
+      <div class="pt-3">
+        <strong>Address</strong>
+        <p class="pt-2"><%= @cafe.address %></p>
+      </div>
+      <div class="pt-3">
+        <strong>About Cafe</strong>
+        <p class="pt-2">
+          <%= simple_format(@cafe.introduction) %>
+        </p>
+      </div>
+      <div class="pt-3">
+        <strong>Tags</strong>
+        <p class="pt-2">
+          <% @cafe.tags.each do |tag| %>
+            <%= link_to tag.name, cafes_path(tag: tag.name), class: "tag-link" %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="pt-3">
+        <strong>Opening Hours</strong>
+        <p class="pt-2"><%= simple_format(@cafe.opening_hours) %></p>
+      </div>
+    </div>
+  </div>
 
-<h3>Reviews</h3>
-<% if user_signed_in? %>
-  <%= link_to "Write a review", new_cafe_review_path(@cafe) %>
-<% end %>
+  <div class="pt-4">
+    <hr class="w-200 border-top">
+    <div class="d-flex justify-content-between align-items-center">
+      <h6 class="pt-3 pb-3 flex-grow-1 text-center">Reviews</h6>
+      <div class="pt-3">
+        <% if user_signed_in? %>
+          <p><%= link_to "Write a review", new_cafe_review_path(@cafe), class: "btn btn-light border border-dark" %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
 <% @cafe.reviews.each do |review| %>
-  <p>
-    <%= link_to user_path(review.user_id) do %>
-      <%= image_tag review.user.get_profile_image(100,100) %>
-      <%= review.user.name %>
-    <% end %>
-  </p>
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="pt-3 pb-3 user">
+      <%= link_to user_path(review.user_id) do %>
+        <%= image_tag review.user.get_profile_image(35,35), class: "rounded-circle img-thumbnail" %>
+        <span class="pl-2 text-dark"><%= review.user.name %></span>
+      <% end %>
+    </div>
+    <div class="pt-3">
+      <% if user_signed_in? %>
+        <% if review.user == current_user %>
+          <p><%= link_to "Edit", edit_cafe_review_path(@cafe, review), class: "btn btn-light border border-dark" %></p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+    
   <div id="review_rating_<%= review.id %>">
     <script>
       var elem = document.getElementById('review_rating_<%= review.id %>');
@@ -93,15 +137,15 @@
       raty(elem, opt);
     </script>
   </div>
-  <p><%= review.body %></p>
-  <div>
+  
+  <div class="pt-2">
+    <%= review.body %>
+  </div>
+  
+  <div class="pt-2">
     <%= image_tag review.image, size: "100x100" %>
   </div>
-  <% if user_signed_in? %>
-    <% if review.user == current_user %>
-      <%= link_to "Edit", edit_cafe_review_path(@cafe, review) %>
-    <% end %>
-  <% end %>
+  
   
   <div>
     <% review.comments.each do |comment| %>
@@ -130,3 +174,4 @@
     <% end %>
   </div>
 <% end %>
+</div>
