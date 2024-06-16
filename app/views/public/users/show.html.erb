@@ -13,35 +13,41 @@
   
   <div class="row">
     <div class="col-md-6">
-      <h6>Reviews</h6>
+      <h6 class="text-center">Reviews</h6>
       <% @user.reviews.each do |review| %>
         <div class="card mt-4 mb-4 narrow-card">
-          <div class="card-body">
-            <div class="pb-3">
-              <h3><%= link_to review.cafe.name, cafe_path(review.cafe_id) %></h3>
+          <div class="pt-3 text-center">
+            <h3><%= link_to review.cafe.name, cafe_path(review.cafe_id), class:"text-dark" %></h3>
+          </div>
+          <div class="card-body row">
+            <div class="col-md-6">
+              <div id="review_rating_<%= review.id %>">
+                <script>
+                  var elem = document.getElementById('review_rating_<%= review.id %>');
+                  var opt = {  
+                      starOn: "<%= asset_path('star-on.png') %>",
+                      starOff: "<%= asset_path('star-off.png') %>",
+                      half: false,
+                      readOnly: true,
+                      score: <%= review.rating %>,
+                    };
+                  if (elem) elem.innerHTML = ""
+                  raty(elem, opt);
+                </script>
+              </div>
+              <div class="pt-2">
+                <%= simple_format(review.body) %>
+              </div>
             </div>
-            <div id="review_rating_<%= review.id %>">
-              <script>
-                var elem = document.getElementById('review_rating_<%= review.id %>');
-                var opt = {  
-                    starOn: "<%= asset_path('star-on.png') %>",
-                    starOff: "<%= asset_path('star-off.png') %>",
-                    half: false,
-                    readOnly: true,
-                    score: <%= review.rating %>,
-                  };
-                if (elem) elem.innerHTML = ""
-                raty(elem, opt);
-              </script>
+            <div class="col-md-6 pt-2">
+              <%= image_tag review.image, size: "400x300", class: "img-fluid" %>
             </div>
-        <p><%= review.body %></p>
-        <div>
-          <%= image_tag review.image, size: "100x100" %>
+          </div>
         </div>
       <% end %>
     </div>
     <div class="col-md-6">
-      <h6>Bookmarks</h6>
+      <h6 class="text-center">Bookmarks</h6>
       <% if current_user.email != "guest@example.com" %>
         <% @user.bookmarks.each do |bookmark| %>
           <% cafe = bookmark.cafe %>
