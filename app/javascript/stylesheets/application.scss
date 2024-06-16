@@ -1,13 +1,16 @@
 @use '~bootstrap/scss/bootstrap';
 
-.custom-bg {
-  background-color: #a2bd95;
-}
-
 body {
   font-family: 'Poppins', sans-serif;
 }
 
+/* application.html.erb/admin.html.erb footer*/
+.custom-bg {
+  background-color: #a2bd95;
+}
+
+
+ /* top.html.erb*/
 .tag-link {
     display: inline-block;
     padding: 3px 10px; 
@@ -42,10 +45,12 @@ body {
   background-color: #f0f0f0;
 }
 
+/* cafes/new.html.erb */
 .opening-hours {
   text-align: left;
 }
 
+ /* cafes/index.html.erb */
 .image {
   height: 300px; 
   display: flex;
@@ -72,6 +77,7 @@ body {
   color: black !important; 
 }
 
+ /* cafes/show.html.erb */
 .cafe-background {
   background-size: cover; 
   background-position: center; 
@@ -119,3 +125,9 @@ body {
 .comment-span {
   max-width: 400px;
 }
+
+ /* users/show.html.erb */
+ .profile-image {
+   width: 100px;
+   height: 100px;
+ }
