@@ -77,7 +77,8 @@ body {
   background-position: center; 
   background-repeat: no-repeat;
   position: relative;
-  min-height: 50vh; 
+  min-height: 50vh;
+  padding: 20px 0;
 }
 
 .overlay {
@@ -103,4 +104,18 @@ body {
 .narrow-card {
   width: 75%;
   margin: 0 auto;
+}
+
+.review-profile-image {
+  width: 45px;
+  height: 45px;
+}
+
+.comment-profile-image {
+  width: 35px;
+  height: 35px;
+}
+
+.comment-span {
+  max-width: 400px;
 }

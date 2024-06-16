@@ -116,7 +116,7 @@
         <div class="d-flex justify-content-between align-items-center">
           <div class="pb-3 user">
             <%= link_to user_path(review.user_id) do %>
-              <%= image_tag review.user.get_profile_image(35,35), class: "rounded-circle img-thumbnail" %>
+              <%= image_tag review.user.get_profile_image(35,35), class: "rounded-circle img-thumbnail review-profile-image" %>
               <span class="pl-2 text-dark"><%= review.user.name %></span>
             <% end %>
           </div>
@@ -163,17 +163,19 @@
         <% end %>
 
         <% review.comments.each do |comment| %>
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="pt-3 pl-5 user">
+          <div class="row d-flex justify-content-between align-items-center">
+            <div class="col-12 col-md-7 pt-3 pl-5 user">
               <%= link_to user_path(comment.user_id) do %>
-                <%= image_tag comment.user.get_profile_image(25,25), class: "rounded-circle img-thumbnail" %>
+                <%= image_tag comment.user.get_profile_image(25,25), class: "rounded-circle img-thumbnail comment-profile-image" %>
               <% end %>
               <span class="pl-2"><%= comment.comment %></span>
             </div>
-            <div class="pt-3">
+            <div class="col-12 col-md-5 pt-3">
               <% if user_signed_in? %>
                 <% if comment.user == current_user %>
-                  <%= button_to 'Delete Comment', cafe_review_comment_path(@cafe, review, comment), method: :delete, data: { confirm: "Are you sure you want to delete your comment?" }, class: "btn btn-light border border-dark" %>
+                  <div class="d-flex justify-content-end">
+                    <%= button_to 'Delete Comment', cafe_review_comment_path(@cafe, review, comment), method: :delete, data: { confirm: "Are you sure you want to delete your comment?" }, class: "btn btn-light border border-dark" %>
+                  </div>
                 <% end %>
               <% end %>
             </div>
@@ -181,15 +183,15 @@
         <% end %>
 
         <% if user_signed_in? %>
-          <div class="pt-3">
+          <div>
             <%= form_with model: @comment, url: cafe_review_comments_path(review.cafe_id, review) do |f| %>
-              <div class="d-flex justify-content-between align-items-center pb-3">
+              <div class="d-flex justify-content-between align-items-center row">
                 <% if current_user.email != "guest@example.com" %>
-                  <div class="pl-5 user flex-grow-1">
-                    <%= image_tag current_user.get_profile_image(25,25), class: "rounded-circle img-thumbnail" %>
-                    <span class="pl-2 flex-grow-1"><%= f.text_field :comment, placeholder:"Write a Comment", class: "form-control" %></span>
+                  <div class="col-12 col-md-7 pl-5 pt-3 user flex-grow-1 d-flex">
+                    <%= image_tag current_user.get_profile_image(25,25), class: "rounded-circle img-thumbnail comment-image d-block" %>
+                    <span class="pl-2 flex-grow-1 comment-span"><%= f.text_field :comment, placeholder:"Write a Comment", class: "form-control" %></span>
                   </div>
-                  <div>
+                  <div class="col-12 col-md-5 d-flex justify-content-end pt-3">
                     <%= f.submit 'Post Comment', class: "btn btn-light border border-dark" %>
                   </div>
                 <% end %>
