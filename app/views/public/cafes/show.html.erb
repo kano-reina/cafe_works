@@ -150,17 +150,21 @@
       
       <div>
         <% review.comments.each do |comment| %>
-          <p class="pt-3">
-            <%= link_to user_path(comment.user_id) do %>
-              <%= image_tag comment.user.get_profile_image(25,25), class: "rounded-circle img-thumbnail" %>
-            <% end %>
-            <%= comment.comment %>
-            <% if user_signed_in? %>
-              <% if comment.user == current_user %>
-                <%= button_to 'Delete', cafe_review_comment_path(@cafe, review, comment), method: :delete, data: { confirm: "Are you sure you want to delete your comment?" }, class: "btn btn-light border border-dark" %>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="pt-3 pb-3 user">
+              <%= link_to user_path(comment.user_id) do %>
+                <%= image_tag comment.user.get_profile_image(25,25), class: "rounded-circle img-thumbnail" %>
               <% end %>
-            <% end %>
-          </p>
+              <%= comment.comment %>
+            </div>
+            <div class="pt-3">
+              <% if user_signed_in? %>
+                <% if comment.user == current_user %>
+                  <p><%= button_to 'Delete', cafe_review_comment_path(@cafe, review, comment), method: :delete, data: { confirm: "Are you sure you want to delete your comment?" }, class: "btn btn-light border border-dark" %></p>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
         <% end %>
       </div>
       <div>
