@@ -4,7 +4,7 @@ class Public::UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @cafes = Cafe.all
+    @cafes = Cafe.page(params[:page])
   end
 
   def edit

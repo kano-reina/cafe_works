@@ -15,7 +15,7 @@
     <div class="col-md-6">
       <h6 class="text-center">Reviews</h6>
       <% @user.reviews.each do |review| %>
-        <div class="card mt-4 mb-4 narrow-card">
+        <div class="card mt-4 mb-4 shadow-lg narrow-card">
           <div class="pt-3 text-center">
             <h3><%= link_to review.cafe.name, cafe_path(review.cafe_id), class:"text-dark" %></h3>
           </div>
@@ -48,20 +48,30 @@
     </div>
     <div class="col-md-6">
       <h6 class="text-center">Bookmarks</h6>
-      <% if current_user.email != "guest@example.com" %>
-        <% @user.bookmarks.each do |bookmark| %>
-          <% cafe = bookmark.cafe %>
-          <p><%= link_to cafe.name, cafe_path(cafe.id) %></p>
-          <div>
-            <% last_review = cafe.reviews.order(created_at: :desc).first %>
-            <% if last_review.present? && last_review.image.attached? %>
-              <%= image_tag last_review.image.variant(resize_to_limit: [500, 500]).processed %>
-            <% else %>
-              <%= image_tag 'no_image2.png', size: "500x500" %>
-            <% end %>
-          </div>
+      <div class="text-center">
+        <% if current_user.email != "guest@example.com" %>
+          <% @user.bookmarks.each do |bookmark| %>
+            <% cafe = bookmark.cafe %>
+            <div class="card mx-auto mt-4 shadow-lg narrow-card">
+              <div class="image">
+                <% last_review = cafe.reviews.order(created_at: :desc).first %>
+                <% if last_review.present? && last_review.image.attached? %>
+                  <%= image_tag last_review.image.variant(resize_to_limit: [500, 500]).processed, class: "img-fluid" %>
+                <% else %>
+                  <%= image_tag 'no_image2.png', size: "400x400", class: "img-fluid" %>
+                <% end %>
+              </div>
+              <div class="card-body text-center">
+                <h5><%= link_to cafe.name, cafe_path(cafe.id), class:"text-dark" %></h5>
+              </div>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>
+
+<div class="d-flex justify-content-center mt-4 mb-4">
+  <%= paginate @cafes %>
+</div> 
