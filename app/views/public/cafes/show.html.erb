@@ -93,7 +93,9 @@
       </div>
     </div>
   </div>
+</div>
 
+<div class="container">
   <div class="pt-4">
     <hr class="w-200 border-top">
     <div class="d-flex justify-content-between align-items-center">
@@ -105,79 +107,97 @@
       </div>
     </div>
   </div>
+</div>
 
-  <div>
-    <% @cafe.reviews.each do |review| %>
-      <div class="d-flex justify-content-between align-items-center">
-        <div class="pt-3 pb-3 user">
-          <%= link_to user_path(review.user_id) do %>
-            <%= image_tag review.user.get_profile_image(35,35), class: "rounded-circle img-thumbnail" %>
-            <span class="pl-2 text-dark"><%= review.user.name %></span>
-          <% end %>
-        </div>
-        <div class="pt-3">
-          <% if user_signed_in? %>
-            <% if review.user == current_user %>
-              <p><%= link_to "Edit", edit_cafe_review_path(@cafe, review), class: "btn btn-light border border-dark" %></p>
+<div class="container">
+  <% @cafe.reviews.each do |review| %>
+    <div class="card mt-4 mb-4 narrow-card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="pb-3 user">
+            <%= link_to user_path(review.user_id) do %>
+              <%= image_tag review.user.get_profile_image(35,35), class: "rounded-circle img-thumbnail" %>
+              <span class="pl-2 text-dark"><%= review.user.name %></span>
             <% end %>
-          <% end %>
+          </div>
+          <div class="pb-3">
+            <% if user_signed_in? %>
+              <% if review.user == current_user %>
+                <%= link_to "Edit Review", edit_cafe_review_path(@cafe, review), class: "btn btn-light border border-dark" %>
+              <% end %>
+            <% end %>
+          </div>
         </div>
-      </div>
-        
-      <div id="review_rating_<%= review.id %>">
-        <script>
-          var elem = document.getElementById('review_rating_<%= review.id %>');
-          var opt = {  
-              starOn: "<%= asset_path('star-on.png') %>",
-              starOff: "<%= asset_path('star-off.png') %>",
-              half: false,
-              readOnly: true,
-              score: <%= review.rating %>,
-            };
-          if (elem) elem.innerHTML = ""
-          raty(elem, opt);
-        </script>
-      </div>
-      
-      <div class="pt-2">
-        <%= review.body %>
-      </div>
-      
-      <div class="pt-2">
-        <%= image_tag review.image, size: "100x100" %>
-      </div>
-      
-      
-      <div>
+
+        <div class="row justify-content-start m-2">
+          <div class="col-md-6">
+            <div id="review_rating_<%= review.id %>" class="pt-2">
+              <script>
+                var elem = document.getElementById('review_rating_<%= review.id %>');
+                var opt = {  
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  half: false,
+                  readOnly: true,
+                  score: <%= review.rating %>,
+                };
+                if (elem) elem.innerHTML = ""
+                raty(elem, opt);
+              </script>
+            </div>
+            <div class="pt-2">
+              <%= simple_format(review.body) %>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <% if review.image.attached? %>
+              <div class="pt-2">
+                <%= image_tag review.image, size: "400x300", class: "img-fluid" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <% if review.comments.exists? %>
+          <hr>
+        <% end %>
+
         <% review.comments.each do |comment| %>
           <div class="d-flex justify-content-between align-items-center">
-            <div class="pt-3 pb-3 user">
+            <div class="pt-3 pl-5 user">
               <%= link_to user_path(comment.user_id) do %>
                 <%= image_tag comment.user.get_profile_image(25,25), class: "rounded-circle img-thumbnail" %>
               <% end %>
-              <%= comment.comment %>
+              <span class="pl-2"><%= comment.comment %></span>
             </div>
             <div class="pt-3">
               <% if user_signed_in? %>
                 <% if comment.user == current_user %>
-                  <p><%= button_to 'Delete', cafe_review_comment_path(@cafe, review, comment), method: :delete, data: { confirm: "Are you sure you want to delete your comment?" }, class: "btn btn-light border border-dark" %></p>
+                  <%= button_to 'Delete Comment', cafe_review_comment_path(@cafe, review, comment), method: :delete, data: { confirm: "Are you sure you want to delete your comment?" }, class: "btn btn-light border border-dark" %>
                 <% end %>
               <% end %>
             </div>
           </div>
         <% end %>
-      </div>
-      <div>
+
         <% if user_signed_in? %>
-          <%= form_with model: @comment, url: cafe_review_comments_path(review.cafe_id, review) do |f| %>
-            <% if current_user.email != "guest@example.com" %>
-              <%= image_tag current_user.get_profile_image(25,25), class: "rounded-circle img-thumbnail" %>
-              <%= f.text_field :comment, placeholder:"Write a Comment" %>
-              <%= f.submit 'Post' %>
+          <div class="pt-3">
+            <%= form_with model: @comment, url: cafe_review_comments_path(review.cafe_id, review) do |f| %>
+              <div class="d-flex justify-content-between align-items-center pb-3">
+                <% if current_user.email != "guest@example.com" %>
+                  <div class="pl-5 user flex-grow-1">
+                    <%= image_tag current_user.get_profile_image(25,25), class: "rounded-circle img-thumbnail" %>
+                    <span class="pl-2 flex-grow-1"><%= f.text_field :comment, placeholder:"Write a Comment", class: "form-control" %></span>
+                  </div>
+                  <div>
+                    <%= f.submit 'Post Comment', class: "btn btn-light border border-dark" %>
+                  </div>
+                <% end %>
+              </div>
             <% end %>
-          <% end %>  
+          </div>
         <% end %>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>

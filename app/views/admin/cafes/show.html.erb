@@ -1,95 +1,152 @@
-<div>
-  <% last_review = @cafe.reviews.order(created_at: :desc).first %>
-  <% if last_review.present? && last_review.image.attached? %>
-    <%= image_tag last_review.image.variant(resize_to_limit: [500, 500]).processed %>
-  <% else %>
-    <%= image_tag 'white.png', size: "500x500" %>
-  <% end %>
-</div>
-<h1><%= @cafe.name %></h1>
-<div>
-  <% if @cafe.has_power_outlet? %>
-    <p>Available</p>
-  <% else %>
-    <p>N/A</p>
-  <% end %>
-</div>
-<div>
-  <% if @cafe.chat_meeting_ok? %>
-    <p>Chat/Meeting OK</p>
-  <% else %>
-    <p>Quiet Environment</p>
-  <% end %>
-</div>
-<div>
-  <% if @cafe.has_wifi? %>
-    <p>Available</p>
-  <% else %>
-    <p>N/A</p>
-  <% end %>
-</div>
-
-<div id="average_rating">
-  <script>
-    var elem = document.getElementById('average_rating');
-    var opt = {  
-      starOn: "<%= asset_path('star-on.png') %>",
-      starOff: "<%= asset_path('star-off.png') %>",
-      half: false,
-      readOnly: true,
-      score: <%= @average_rating %>,
-    };
-    if (elem) elem.innerHTML = ""
-    raty(elem, opt);
-  </script>
-</div>
-
-<h3>Detail Information</h3>
-<p>Address <%= @cafe.address %></p>
-<p>About Cafe <%= simple_format(@cafe.introduction) %></p>
-<% @cafe.tags.each do |tag| %>
-  <%= link_to tag.name, cafes_path(tag: tag.name) %>
-<% end %>
-<p>Opening Hours <%= simple_format(@cafe.opening_hours) %></p>
-<%= link_to "Edit info", edit_admin_cafe_path(@cafe) %>
-
-<h3>Reviews</h3>
-<% @cafe.reviews.each do |review| %>
-  <p>
-    <%= link_to admin_user_path(review.user_id) do %>
-      <%= image_tag review.user.get_profile_image(100,100) %>
-      <%= review.user.name %>
-    <% end %>
-  </p>
-  <div id="review_rating_<%= review.id %>">
-    <script>
-      var elem = document.getElementById('review_rating_<%= review.id %>');
-      var opt = {  
-          starOn: "<%= asset_path('star-on.png') %>",
-          starOff: "<%= asset_path('star-off.png') %>",
-          half: false,
-          readOnly: true,
-          score: <%= review.rating %>,
-        };
-      if (elem) elem.innerHTML = ""
-      raty(elem, opt);
-    </script>
-  </div>
-  <p><%= review.body %></p>
-  <div>
-    <%= image_tag review.image, size: "100x100" %>
-  </div>
-  <%= button_to 'Delete Review', admin_cafe_review_path(@cafe, review), method: :delete, data: { confirm: "Are you sure you want to delete this review?" } %>
-  
-  <div>
-    <% review.comments.each do |comment| %>
-      <p>
-        <%= link_to user_path(comment.user_id) do %>
-          <%= image_tag comment.user.get_profile_image(100,100) %>
+<div class="cafe-background" style="background-image: url('<%= @cafe.reviews.order(created_at: :desc).first&.image&.attached? ? url_for(@cafe.reviews.order(created_at: :desc).first.image.variant(resize_to_limit: [1200, 800]).processed) : asset_path('white.png') %>');">
+  <div class="overlay">
+    <div class="container">
+      <h1 class="pt-5 pb-3"><%= @cafe.name %></h1>
+      <div>
+        <% if @cafe.has_power_outlet? %>
+          <p><i class="fa-solid fa-plug pr-4"></i>Available</p>
+        <% else %>
+          <p><i class="fa-solid fa-plug pr-4"></i>N/A</p>
         <% end %>
-        <%= comment.comment %>
-        <%= button_to 'Delete Comment', admin_cafe_review_comment_path(@cafe, review, comment), method: :delete, data: { confirm: "Are you sure you want to delete this comment?" } %>
-      </p>
-    <% end %>
+      </div>
+      <div>
+        <% if @cafe.chat_meeting_ok? %>
+          <p><i class="fa-solid fa-volume-high icon pr-3"></i>Chat/Meeting OK</p>
+        <% else %>
+          <p><i class="fa-solid fa-volume-high icon pr-3"></i>Quiet Environment</p>
+        <% end %>
+      </div>
+      <div>
+        <% if @cafe.has_wifi? %>
+          <p><i class="fa-solid fa-wifi icon pr-3"></i>Available</p>
+        <% else %>
+          <p><i class="fa-solid fa-wifi icon pr-3"></i>N/A</p>
+        <% end %>
+      </div>
+      
+      <div id="average_rating" class="pt-3">
+        <script>
+          var elem = document.getElementById('average_rating');
+          var opt = {  
+            starOn: "<%= asset_path('star-on.png') %>",
+            starOff: "<%= asset_path('star-off.png') %>",
+            half: false,
+            readOnly: true,
+            score: <%= @average_rating %>,
+          };
+          if (elem) elem.innerHTML = ""
+          raty(elem, opt);
+        </script>
+      </div>
+    </div>
   </div>
-<% end %>
+</div>
+
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center">
+    <h6 class="pt-3 pb-3 flex-grow-1 text-center">Detail Information</h6>
+    <div class="pt-3">
+      <p><%= link_to "Edit info", edit_admin_cafe_path(@cafe), class: "btn btn-light border border-dark" %></p>
+    </div>
+  </div>
+
+<div class="row">
+    <div class="col-md-6">
+      <div class="pt-3">
+        <strong>Address</strong>
+        <p class="pt-2"><%= @cafe.address %></p>
+      </div>
+      <div class="pt-3">
+        <strong>About Cafe</strong>
+        <p class="pt-2">
+          <%= simple_format(@cafe.introduction) %>
+        </p>
+      </div>
+      <div class="pt-3">
+        <strong>Tags</strong>
+        <p class="pt-2">
+          <% @cafe.tags.each do |tag| %>
+            <%= link_to tag.name, admin_cafes_path(tag: tag.name), class: "tag-link" %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="pt-3">
+        <strong>Opening Hours</strong>
+        <p class="pt-2"><%= simple_format(@cafe.opening_hours) %></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="pt-4">
+    <hr class="w-200 border-top">
+    <h6 class="pt-3 pb-3 flex-grow-1 text-center">Reviews</h6>
+    
+    <% @cafe.reviews.each do |review| %>
+      <div class="card mt-4 mb-4 narrow-card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="pb-3 user">
+              <%= link_to admin_user_path(review.user_id) do %>
+                <%= image_tag review.user.get_profile_image(35,35), class: "rounded-circle img-thumbnail" %>
+                <span class="pl-2 text-dark"><%= review.user.name %></span>
+              <% end %>
+            </div>
+            <div class="pb-3">
+              <p><%= button_to 'Delete Review', admin_cafe_review_path(@cafe, review), method: :delete, data: { confirm: "Are you sure you want to delete this review?" }, class: "btn btn-light border border-dark" %></p>
+            </div>
+          </div>
+          
+          <div class="row justify-content-start m-2">
+          <div class="col-md-6">
+            <div id="review_rating_<%= review.id %>" class="pt-2">
+              <script>
+                var elem = document.getElementById('review_rating_<%= review.id %>');
+                var opt = {  
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  half: false,
+                  readOnly: true,
+                  score: <%= review.rating %>,
+                };
+                if (elem) elem.innerHTML = ""
+                raty(elem, opt);
+              </script>
+            </div>
+            <div class="pt-2">
+              <%= simple_format(review.body) %>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <% if review.image.attached? %>
+              <div class="pt-2">
+                <%= image_tag review.image, size: "400x300", class: "img-fluid" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        
+        <% if review.comments.exists? %>
+          <hr>
+        <% end %>
+        
+        <% review.comments.each do |comment| %>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="pt-3 pl-5 user">
+              <%= link_to admin_user_path(comment.user_id) do %>
+                <%= image_tag comment.user.get_profile_image(25,25), class: "rounded-circle img-thumbnail" %>
+              <% end %>
+              <span class="pl-2"><%= comment.comment %></span>
+            </div>
+            <div class="pt-3">
+              <p><%= button_to 'Delete Comment', admin_cafe_review_comment_path(@cafe, review, comment), method: :delete, data: { confirm: "Are you sure you want to delete this comment?" }, class: "btn btn-light border border-dark" %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

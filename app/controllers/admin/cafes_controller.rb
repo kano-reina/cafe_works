@@ -13,6 +13,7 @@ class Admin::CafesController < ApplicationController
   
   def show
     @cafe = Cafe.find(params[:id])
+    @average_rating = @cafe.average_rating
   end
   
   def edit
