@@ -18,7 +18,7 @@
               <% if last_review.present? && last_review.image.attached? %>
                 <%= image_tag last_review.image.variant(resize_to_limit: [500, 500]).processed, class: "img-fluid" %>
               <% else %>
-                <%= image_tag 'no_image2.png', size: "400x400", class: "img-fluid" %>
+                <%= image_tag 'no_image.png', size: "400x400", class: "img-fluid" %>
               <% end %>
             </div>
             <div class="card-body text-center">

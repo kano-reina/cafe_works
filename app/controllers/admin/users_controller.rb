@@ -7,6 +7,8 @@ class Admin::UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    combined_items = (@user.reviews + @user.bookmarks).sort_by { |item| item.created_at }.reverse
+    @paginated_items = Kaminari.paginate_array(combined_items).page(params[:page]).per(5)
   end
     
   def edit
