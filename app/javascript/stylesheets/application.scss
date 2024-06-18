@@ -131,3 +131,32 @@ body {
    width: 100px;
    height: 100px;
  }
+ 
+ /* users/index.html.erb */
+ .user-list {
+  list-style-type: none;
+  padding: 0; 
+}
+
+.user-item {
+  display: flex; 
+  align-items: center;
+  padding: 10px; 
+  border-bottom: 1px solid #ddd;
+}
+
+.user-name {
+  flex: 2;
+  text-align: left;
+}
+
+.user-email {
+  flex: 3;
+  text-align: left;
+}
+
+.user-action {
+  flex: 1;
+  text-align: right;
+  text-align: left;
+}

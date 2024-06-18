@@ -136,7 +136,7 @@
         <% review.comments.each do |comment| %>
           <div class="row d-flex justify-content-between align-items-center">
             <div class="col-12 col-md-7 pt-3 pl-5 user">
-              <%= link_to user_path(comment.user_id) do %>
+              <%= link_to admin_user_path(comment.user_id) do %>
                 <%= image_tag comment.user.get_profile_image(25,25), class: "rounded-circle img-thumbnail comment-profile-image" %>
               <% end %>
               <span class="pl-2"><%= comment.comment %></span>
