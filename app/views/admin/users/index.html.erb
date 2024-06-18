@@ -1,8 +1,13 @@
-<h2>Users</h2>
-<ul>
-  <% @users.each do |user| %>
-    <li>
-      <%= user.name %>  <%= user.email %> <%= link_to "Edit", edit_admin_user_path(user) %>
-    </li>
-  <% end %>
-</ul>
+<div class="container">
+  <div class="text-center">
+    <h2>Users</h2>
+    <ul>
+      <% @users.each do |user| %>
+        <hr class="w-200 border-top">
+        <li>
+          <%= user.name %>  <%= user.email %> <%= link_to "Edit", edit_admin_user_path(user) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
