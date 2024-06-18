@@ -7,8 +7,10 @@ body {
 /* application.html.erb/admin.html.erb footer*/
 header {
   position: fixed;
-  width: 100%;
-}
+	width: 100%;
+	z-index: 1000;
+	background-color: white;
+} 
 
 .custom-bg {
   background-color: #a2bd95;
@@ -152,16 +154,12 @@ header {
 
 .user-name {
   flex: 2;
-  text-align: left;
 }
 
 .user-email {
   flex: 3;
-  text-align: left;
 }
 
 .user-action {
   flex: 1;
-  text-align: right;
-  text-align: left;
 }
