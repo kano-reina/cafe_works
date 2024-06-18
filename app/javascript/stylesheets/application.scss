@@ -5,6 +5,11 @@ body {
 }
 
 /* application.html.erb/admin.html.erb footer*/
+header {
+  position: fixed;
+  width: 100%;
+}
+
 .custom-bg {
   background-color: #a2bd95;
 }
