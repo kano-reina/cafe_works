@@ -1,17 +1,19 @@
-<div class="container">
+<div class="container" style="background-image: url(<%= asset_path('background.jpg') %>);">
   <div class="row">
     <div class="justify-center align-items-center mx-auto pt-5">
-      <div class="text-center">
-        <%= form_with url: cafes_path, method: :get, local: true do |form| %>
-          <%= form.text_field :query, value: params[:query], placeholder:"cafe name, location", style: "width: 300px;" %>
-          <%= form.submit 'Search' %>
-        <% end %>
-      </div>
-
-      <div class="text-center">
-        <% Tag.top_tags.each do |tag| %>
-          <%= link_to tag.name, cafes_path(tag: tag.name), class: "tag-link"%>
-        <% end %>
+      <div>
+        <div class="text-center">
+          <%= form_with url: cafes_path, method: :get, local: true do |form| %>
+            <%= form.text_field :query, value: params[:query], placeholder:"cafe name, location", style: "width: 300px;" %>
+            <%= form.submit 'Search' %>
+          <% end %>
+        </div>
+  
+        <div class="text-center">
+          <% Tag.top_tags.each do |tag| %>
+            <%= link_to tag.name, cafes_path(tag: tag.name), class: "tag-link"%>
+          <% end %>
+        </div>
       </div>
       
       <div class="pt-4">
