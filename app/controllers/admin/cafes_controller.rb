@@ -18,6 +18,7 @@ class Admin::CafesController < ApplicationController
   
   def edit
     @cafe = Cafe.find(params[:id])
+    @cafe.tag_list = @cafe.tags.map(&:name).join(', ')
   end
   
   def update
