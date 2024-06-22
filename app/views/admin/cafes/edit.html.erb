@@ -53,7 +53,7 @@
             <p>Address</p>
           </div>
           <div class="col-md-10">
-            <%= f.text_field :address, class: "form-control" %>
+            <%= f.text_field :address, placeholder:"東京都新宿区新宿３丁目１ー１ー１", class: "form-control" %>
           </div>
         </div>
       </div>
@@ -64,7 +64,8 @@
             <p>Opening Hours</p>
           </div>
           <div class="col-md-10">
-            <%= f.text_area :opening_hours, class: "form-control" %>
+            <%= f.text_area :opening_hours, placeholder:
+            "Mon 9:00 AM - 12:00PM, 3:00PM - 8:00 PM\nTue 9:00 AM - 12:00PM\nWed 9:00 AM - 12:00PM\nThu 9:00 AM - 12:00PM\nFri 9:00 AM - 12:00PM\nSat 9:00 AM - 12:00PM\nSun 9:00 AM - 12:00PM", class: "form-control" %>
           </div>
         </div>
       </div>

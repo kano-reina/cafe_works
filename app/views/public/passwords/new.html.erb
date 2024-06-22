@@ -4,19 +4,21 @@
   
   <div class="pt-3">
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-      <%= render "admins/shared/error_messages", resource: resource %>
+      <%= render "devise/shared/error_messages", resource: resource %>
     
       <div class="field pt-3">
-        <%= f.label :email %><br />
+        <span class="pr-3"><%= f.label :email %></span>
         <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
       </div>
     
-      <div class="actions pt-5">
+      <div class="actions pt-3">
         <%= f.submit "Send me reset password instructions" %>
       </div>
     <% end %>
     
-    <%= render "admins/shared/links" %>
+    <div class="pt-3">
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
 
 </div>
