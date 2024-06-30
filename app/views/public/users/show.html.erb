@@ -17,7 +17,7 @@
       <% @user.reviews.each do |review| %>
         <div class="card mt-4 mb-4 shadow-lg narrow-card">
           <div class="pt-3 text-center">
-            <h3><%= link_to review.cafe.name, cafe_path(review.cafe_id), class:"text-dark" %></h3>
+            <h5><%= link_to review.cafe.name, cafe_path(review.cafe_id), class:"text-dark" %></h5>
           </div>
           <div class="card-body row">
             <div class="col-md-6">

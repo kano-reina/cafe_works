@@ -94,7 +94,6 @@ header {
   background-repeat: no-repeat;
   position: relative;
   min-height: 60vh;
-  padding: 20px 0;
 }
 
 .overlay {
@@ -155,14 +154,8 @@ header {
   border-bottom: 1px solid #ddd;
 }
 
-.user-name {
-  flex: 2;
-}
-
-.user-email {
-  flex: 3;
-}
-
-.user-action {
-  flex: 1;
+@media (max-width: 768px) {
+  .email {
+    word-wrap: break-word;
+  }
 }

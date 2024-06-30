@@ -16,7 +16,7 @@
 <body class="d-flex flex-column vh-100">
   <header class ="shadow-sm">
     <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
+        <div class="container p-0">
           <a class="navbar-brand" href="<%= admin_cafes_path %>"><%= image_tag('logo.jpg', size: "60x60") %></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,7 +44,7 @@
       </div>
     </nav>
   </header>
-  <main class="mb-auto" style="margin-top: 120px;">
+  <main class="mb-auto" style="margin-top: 88px;">
     <p class="notice"><%= notice %></p>
     <%= yield %>
   </main>
