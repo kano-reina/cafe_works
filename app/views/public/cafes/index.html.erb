@@ -2,7 +2,7 @@
   <div class="justify-center align-items-center mx-auto pt-5">
     <div class="text-center">
       <%= form_with url: cafes_path, method: :get, local: true do |form| %>
-        <%= form.text_field :query, value: params[:query], placeholder:"cafe name, location", style: "width: 300px;" %>
+        <%= form.text_field :query, value: params[:query], placeholder:"cafe name, location", style:"width: 200px;" %>
         <%= form.submit 'Search' %>
       <% end %>
     </div>
