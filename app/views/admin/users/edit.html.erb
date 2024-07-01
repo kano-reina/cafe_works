@@ -1,14 +1,13 @@
 <div class="container">
-  
   <div class="pt-5 d-flex justify-content-center">
     <%= form_with model: @user, url:admin_user_path(@user) do |f| %>
       
       <div class="form-group">
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-4">
             <%= f.label :id, "User ID" %>
           </div>
-          <div class="col-md-10">
+          <div class="col-8">
             <%= @user.id %>
           </div>
         </div>
@@ -16,22 +15,22 @@
       
       <div class="form-group">
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-4">
             <%= f.label :name, "User Name", style: "white-space: nowrap;" %>
           </div>
-          <div class="col-md-10">
-            <%= f.text_field :name, autofocus: true, placeholder:"User Name", class: "form-control", style: "width: 500px" %>
+          <div class="col-8">
+            <%= f.text_field :name, autofocus: true, placeholder:"User Name", class: "form-control", style: "width: 200px" %>
           </div>
         </div>
       </div>
       
       <div class="form-group">
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-4">
             <%= f.label :email, "Email" %>
           </div>
-          <div class="col-md-10">
-            <%= f.email_field :email, autocomplete: "email", placeholder:"Email", class: "form-control", style: "width: 500px" %>
+          <div class="col-8">
+            <%= f.email_field :email, autocomplete: "email", placeholder:"Email", class: "form-control", style: "width: 200px" %>
           </div>
         </div>
       </div>
