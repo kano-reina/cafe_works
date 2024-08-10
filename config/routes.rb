@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :comments, only: [:destroy]
      end
     end
+    resource :map, only: [:show] 
   end
   
   devise_for :users, controllers: {
@@ -33,6 +34,6 @@ Rails.application.routes.draw do
         resources :comments, only: [:create, :destroy]
       end
     end
-    
+    resource :map, only: [:show] 
   end
 end
