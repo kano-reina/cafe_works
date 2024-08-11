@@ -53,7 +53,6 @@
             <p>Address</p>
           </div>
           <div class="col-md-10">
-            <%= text_field_tag :zipcode, nil, class: "form-control", placeholder: "XXX-XXXX" %>
             <%= f.text_field :address, placeholder:"東京都新宿区新宿３丁目１ー１ー１", class: "form-control" %>
           </div>
         </div>
@@ -100,5 +99,3 @@
   </div> 
 
 </div>
-
-<%= javascript_pack_tag "jpostal",  'data-turbolinks-track': 'reload' %>

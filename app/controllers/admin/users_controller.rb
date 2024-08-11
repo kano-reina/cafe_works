@@ -1,20 +1,20 @@
 class Admin::UsersController < ApplicationController
-  layout 'admin'
-  
+  layout "admin"
+
   def index
     @users = User.page(params[:page])
   end
-  
+
   def show
     @user = User.find(params[:id])
     combined_items = (@user.reviews + @user.bookmarks).sort_by { |item| item.created_at }.reverse
     @paginated_items = Kaminari.paginate_array(combined_items).page(params[:page]).per(5)
   end
-    
+
   def edit
     @user = User.find(params[:id])
   end
-  
+
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
@@ -24,10 +24,9 @@ class Admin::UsersController < ApplicationController
       render :edit
     end
   end
-  
+
   private
-  def user_params
-    params.require(:user).permit(:profile_image, :name, :email)
-  end
-  
+    def user_params
+      params.require(:user).permit(:profile_image, :name, :email)
+    end
 end

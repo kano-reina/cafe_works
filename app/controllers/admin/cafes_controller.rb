@@ -2,12 +2,20 @@ class Admin::CafesController < ApplicationController
   layout 'admin' 
   
   def index
-    if params[:query].present?
-      @cafes = Cafe.search_by_name_or_address(params[:query]).page(params[:page])
-    elsif params[:tag].present?
-      @cafes = Cafe.joins(:tags).where(tags: { name: params[:tag] }).page(params[:page])
-    else
-      @cafes = Cafe.page(params[:page])
+    respond_to do |format|
+      format.html do
+        if params[:query].present?
+          @cafes = Cafe.search_by_name_or_address(params[:query]).page(params[:page])
+        elsif params[:tag].present?
+          @cafes = Cafe.joins(:tags).where(tags: { name: params[:tag] }).page(params[:page])
+        else
+          @cafes = Cafe.page(params[:page])
+        end
+      end
+      format.json do
+          @cafes = Cafe.all
+        end
+      end
     end
   end
   

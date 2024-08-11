@@ -1,7 +1,7 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_guest_user, only: [:edit]
-  
+
   def show
     @user = User.find(params[:id])
     @cafes = Cafe.page(params[:page])
@@ -10,7 +10,7 @@ class Public::UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
   end
-  
+
   def update
     user = User.find(params[:id])
     if user.update(user_params)
@@ -20,7 +20,7 @@ class Public::UsersController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
     user = User.find(params[:id])
     user.destroy
@@ -28,15 +28,14 @@ class Public::UsersController < ApplicationController
   end
 
   private
-  def ensure_guest_user
-    @user = User.find(params[:id])
-    if @user.guest_user?
-      redirect_to user_path(current_user) , notice: 'Guest users cannot access the profile editing page.'
+    def ensure_guest_user
+      @user = User.find(params[:id])
+      if @user.guest_user?
+        redirect_to user_path(current_user), notice: "Guest users cannot access the profile editing page."
+      end
     end
-  end 
 
-  def user_params
-    params.require(:user).permit(:profile_image, :name, :email)
-  end
-  
+    def user_params
+      params.require(:user).permit(:profile_image, :name, :email)
+    end
 end

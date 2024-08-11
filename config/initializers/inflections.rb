@@ -1,5 +1,5 @@
 ActiveSupport::Inflector.inflections(:en) do |inflect|
-  inflect.irregular 'cafe', 'cafes'
+  inflect.irregular "cafe", "cafes"
 end
 
 # Be sure to restart your server when you modify this file.
