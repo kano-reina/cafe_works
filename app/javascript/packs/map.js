@@ -21,17 +21,43 @@ console.log("test")
 
     const { data: { items } } = await response.json();
     if (!Array.isArray(items)) throw new Error("Items is not an array");
-console.log(items)
+
     items.forEach( item => {
       const latitude = item.latitude;
       const longitude = item.longitude;
-      const cafeName = item.cafe_name;
-console.log(item)
+      const cafeName = item.name;
+      const address = item.address;
+      const cafeId = item.id;
+
       const marker = new google.maps.marker.AdvancedMarkerElement ({
         position: { lat: latitude, lng: longitude },
         map,
         title: cafeName,
       });
+      
+      const contentString = `
+        <div class="information container p-0">
+          <div>
+            <h1 class="h4 font-weight-bold">
+              <a href="/cafes/${cafeId}" target="_blank" style="color: black;">${cafeName}</a>
+            </h1>
+            <p class="text-muted">${address}</p>
+          </div>
+        </div>
+      `;
+      
+      const infowindow = new google.maps.InfoWindow({
+        content: contentString,
+        ariaLabel: cafeName,
+      });
+      
+      marker.addListener("click", () => {
+          infowindow.open({
+          anchor: marker,
+          map,
+        })
+      });
+      
     });
   } catch (error) {
     console.error('Error fetching or processing cafes:', error);
